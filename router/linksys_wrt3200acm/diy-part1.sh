@@ -13,4 +13,4 @@ sed -i 's/#src-git helloworld/src-git helloworld/g' ./feeds.conf.default
 
 # Add a feed source
 # sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
-
+git clone -b master --single-branch https://github.com/destan19/OpenAppFilter ./package/OpenAppFilter
