@@ -15,22 +15,25 @@ on:
         description: 'SSH connection to Actions'
         required: false
         default: 'false'
+  watch:
+    types: started
+#  schedule:
+#    - cron: 0 21 */7 * * 
   #push:
     #branches:
       #- main
     #paths:
-      #- 'router/linksys_wrt32x/.config'
-      #- '.github/workflows/build-openwrt-linksys_wrt32x.yml'
-  schedule:
-    - cron: '0 17 * * *'
+      #- 'router/linksys_wrt3200acm/.config'
+      #- '.github/workflows/build-openwrt-linksys_wrt3200acm.yml'
+
 
 env:
   REPO_URL: https://github.com/coolsnowwolf/lede
   REPO_BRANCH: master
-  FEEDS_CONF: router/linksys_wrt32x/feeds.conf.default
-  CONFIG_FILE: router/linksys_wrt32x/.config
-  DIY_P1_SH: router/linksys_wrt32x/diy-part1.sh
-  DIY_P2_SH: router/linksys_wrt32x/diy-part2.sh
+  FEEDS_CONF: router/linksys_wrt3200acm/feeds.conf.default
+  CONFIG_FILE: router/linksys_wrt3200acm/.config
+  DIY_P1_SH: router/linksys_wrt3200acm/diy-part1.sh
+  DIY_P2_SH: router/linksys_wrt3200acm/diy-part2.sh
   UPLOAD_BIN_DIR: false
   UPLOAD_FIRMWARE: true
   UPLOAD_RELEASE: true
