@@ -17,7 +17,7 @@ sed -i "s/ImmortalWrt/OpenWrt/" {package/base-files/files/bin/config_generate,in
 
 rm -rf ./package/emortal/autocore 
 rm -rf  ./package/emortal/default-settings 
-rm -rf  feeds/packages/net/wrtbwmon
+rm -rf  ./feeds/packages/net/wrtbwmon
 rm -rf  ./feeds/luci/applications/luci-app-wrtbwmon 
 rm -rf  ./feeds/luci/applications/luci-app-netdata
 rm -rf  ./feeds/packages/net/open-app-filter
@@ -424,4 +424,4 @@ EOF
 
 ./scripts/feeds update -i
 cat  ./x86_64/x86_64  > .config
-cat  ./x86_64/comm  >> .config
+#cat  ./x86_64/comm  >> .config
