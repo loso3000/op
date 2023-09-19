@@ -11,6 +11,7 @@ KEY=123456
 config_generate=package/base-files/files/bin/config_generate
 
 sed -i "s/ImmortalWrt/OpenWrt/" {package/base-files/files/bin/config_generate,include/version.mk}
+sed -i "s/ImmortalWrt/openwrt/" ./feeds/luci/modules/luci-mod-system/htdocs/luci-static/resources/view/system/flash.js  #改登陆域名
 #删除冲突插件
 #rm -rf $(find ./feeds/luci/ -type d -regex ".*\(argon\|design\|openclash\).*")
 # rm -rf $(find ./package/emortal/ -type d -regex ".*\(autocore\|default-settings\).*")
@@ -38,12 +39,12 @@ mkdir -p files/etc/root
 # sed -i "s/bootstrap/chuqitopd/g" feeds/luci/modules/luci-base/root/etc/config/luci
 # sed -i 's/bootstrap/chuqitopd/g' feeds/luci/collections/luci/Makefile
 echo "修改默认主题"
-sed -i 's/+luci-theme-bootstrap/+luci-theme-kucat/g' feeds/luci/collections/luci/Makefile
+# sed -i 's/+luci-theme-bootstrap/+luci-theme-kucat/g' feeds/luci/collections/luci/Makefile
 # sed -i "s/luci-theme-bootstrap/luci-theme-$OP_THEME/g" $(find ./feeds/luci/collections/ -type f -name "Makefile")
 # sed -i 's/+luci-theme-bootstrap/+luci-theme-opentopd/g' feeds/luci/collections/luci/Makefile
 # sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 
- git clone -b js https://github.com/gngpp/luci-theme-design.git luci-theme-design
+ git clone -b js https://github.com/gngpp/luci-theme-design.git  package/luci-theme-design
 #rm -rf ./feeds/luci/themes/luci-theme-argon
 sed -i 's,media .. \"\/b,resource .. \"\/b,g' ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon/sysauth.htm
 
@@ -415,12 +416,30 @@ cat>./package/base-files/files/etc/kmodreg<<-\EOF
 IPK=$1
 nowkmoddir=/etc/kmod.d/$IPK
 [ ! -d $nowkmoddir ]  || return
+
+run_drv() {
 opkg update
 for file in `ls $nowkmoddir/*.ipk`;do
-    opkg install "$file"
+    opkg install "$file"  --force-depends
 done
-exit
+
+}
+run_docker() {
+opkg update
+opkg install $nowkmoddir/luci-app-dockerman*.ipk --force-depends
+opkg install $nowkmoddir/luci-i18n-dockerman*.ipk --force-depends
+
+}
+case "$IPK" in
+	"drv")
+		run_drv
+	;;
+	"docker")
+		run_docker
+	;;
+esac
 EOF
+
 
 ./scripts/feeds update -i
 cat  ./x86_64/x86_64  > .config
