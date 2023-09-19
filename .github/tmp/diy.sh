@@ -16,11 +16,11 @@ sed -i "s/ImmortalWrt/openwrt/" ./feeds/luci/modules/luci-mod-system/htdocs/luci
 #rm -rf $(find ./feeds/luci/ -type d -regex ".*\(argon\|design\|openclash\).*")
 # rm -rf $(find ./package/emortal/ -type d -regex ".*\(autocore\|default-settings\).*")
 
-rm -rf ./package/emortal/autocore 
-rm -rf  ./package/emortal/default-settings 
-rm -rf  feeds/packages/net/wrtbwmon
-rm -rf  ./feeds/luci/applications/luci-app-wrtbwmon 
-rm -rf  ./feeds/luci/applications/luci-app-netdata
+#rm -rf ./package/emortal/autocore 
+#rm -rf  ./package/emortal/default-settings 
+#rm -rf  feeds/packages/net/wrtbwmon
+#rm -rf  ./feeds/luci/applications/luci-app-wrtbwmon 
+#rm -rf  ./feeds/luci/applications/luci-app-netdata
 rm -rf  ./feeds/packages/net/open-app-filter
 rm -rf  ./feeds/packages/net/oaf
 rm -rf  ./feeds/luci/applications/luci-app-appfilter
@@ -443,4 +443,4 @@ EOF
 
 ./scripts/feeds update -i
 cat  ./x86_64/x86_64  > .config
-cat  ./x86_64/comm  >> .config
+#cat  ./x86_64/comm  >> .config
