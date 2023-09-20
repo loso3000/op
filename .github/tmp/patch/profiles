@@ -3,7 +3,7 @@ Sysinfo() {
 [ -z "${TARGET_PROFILE}" ] && local TARGET_PROFILE=$(jsonfilter -e '@.model.id' < /etc/board.json | tr ',' '_')
 . /etc/openwrt_release
 if grep -Eq "x86" "/etc/openwrt_release" ; then
-	[ ! -d /sys/firmware/efi ] && DISTRIB_ARCH="${DISTRIB_ARCH} - BIOS" || DISTRIB_ARCH= "${DISTRIB_ARCH} - UEFI"
+	[ ! -d /sys/firmware/efi ] && DISTRIB_ARCH="${DISTRIB_ARCH}  BIOS" 2 > /dev/null 2>&1 || DISTRIB_ARCH= "${DISTRIB_ARCH}  UEFI"2 > /dev/null 2>&1 
 fi
 local IP_Address=`ip -4 a | egrep "br-lan" | grep "inet" | awk '{print $2}'`
 local CPU_Model=$(awk -F ':[ ]' '/model name/{printf ($2);exit}' /proc/cpuinfo)
@@ -259,7 +259,7 @@ case ${YN} in
     ER "正在装载中，请稍等。。。(In mount, Please wait....)"
     bash /etc/kmodreg drv 2 > /dev/null 2>&1 
     echo
-    EY "已装载全部${DRVNUM}个网卡驱动！(All NIC drivers are loaded!)"
+    EY "已装载全部的网卡驱动！(All NIC drivers are loaded!)"
     echo
     sleep 5
     . /etc/profiles 
