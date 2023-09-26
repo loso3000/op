@@ -26,7 +26,7 @@ rm -rf  ./package/emortal2/default-settings
 rm -rf  ./feeds/packages/net/open-app-filter
 rm -rf  ./feeds/packages/net/oaf
 rm -rf  ./feeds/luci/applications/luci-app-appfilter
-
+rm -rf  package/js2
 cat  patch/banner > ./package/base-files/files/etc/banner
 cat  patch/profile > ./package/base-files/files/etc/profile
 cat  patch/profiles > ./package/base-files/files/etc/profiles
