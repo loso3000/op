@@ -68,8 +68,8 @@ sed -i "/timezone='.*'/a\\\t\t\set system.@system[-1].zonename='Asia/Shanghai'" 
 # rm -rf feeds/*/*/{luci-app-dockerman,luci-app-aria2,luci-app-beardropper,oaf,luci-app-adguardhome,luci-app-appfilter,open-app-filter,luci-app-openclash,luci-app-vssr,luci-app-ssr-plus,luci-app-passwall,luci-app-bypass,luci-app-wrtbwmon,luci-app-samba,luci-app-samba4,luci-app-unblockneteasemusic}
 
 #fserror
-#sed -i 's/fs\/cifs/fs\/smb\/client/g'  ./package/kernel/linux/modules/fs.mk
-#sed -i 's/fs\/smbfs_common/fs\/smb\/common/g'  ./package/kernel/linux/modules/fs.mk
+sed -i 's/fs\/cifs/fs\/smb\/client/g'  ./package/kernel/linux/modules/fs.mk
+sed -i 's/fs\/smbfs_common/fs\/smb\/common/g'  ./package/kernel/linux/modules/fs.mk
 
 # rm -rf ./package/network/utils/iproute2/
 # svn export https://github.com/openwrt/openwrt/trunk/package/network/utils/iproute2 ./package/network/utils/iproute2
@@ -78,10 +78,10 @@ sed -i "/timezone='.*'/a\\\t\t\set system.@system[-1].zonename='Asia/Shanghai'" 
 sed -i '/echo/d' ./feeds/packages/utils/coremark/coremark
 
 git clone https://github.com/sirpdboy/luci-app-lucky ./package/lucky
-# git clone https://github.com/sirpdboy/luci-app-ddns-go ./package/ddns-go
+git clone https://github.com/sirpdboy/luci-app-ddns-go ./package/ddns-go
 
 # nlbwmon
-sed -i 's/524288/16777216/g' feeds/packages/net/nlbwmon/files/nlbwmon.config
+#sed -i 's/524288/16777216/g' feeds/packages/net/nlbwmon/files/nlbwmon.config
 # 可以设置汉字名字
 sed -i '/o.datatype = "hostname"/d' feeds/luci/modules/luci-mod-admin-full/luasrc/model/cbi/admin_system/system.lua
 # sed -i '/= "hostname"/d' /usr/lib/lua/luci/model/cbi/admin_system/system.lua
@@ -102,11 +102,11 @@ git clone https://github.com/sbwml/v2ray-geodata feeds/packages/net/v2ray-geodat
 rm -rf package/mosdns/mosdns
 
 # alist 
-#git clone https://github.com/sbwml/luci-app-alist package/alist
-#sed -i 's/网络存储/存储/g' ./package/alist/luci-app-alist/po/zh-cn/alist.po
-#rm -rf feeds/packages/lang/golang
+git clone https://github.com/sbwml/luci-app-alist package/alist
+sed -i 's/网络存储/存储/g' ./package/alist/luci-app-alist/po/zh-cn/alist.po
+rm -rf feeds/packages/lang/golang
 # svn export https://github.com/sbwml/packages_lang_golang/branches/19.x feeds/packages/lang/golang
-#git clone https://github.com/sbwml/packages_lang_golang -b 20.x feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 20.x feeds/packages/lang/golang
 
 
 #cifs
@@ -125,6 +125,144 @@ rm -rf package/mosdns/mosdns
 #无链接
 # mv -f ./package/other/patch/index.htm ./package/lean/autocore/files/x86/index.htm
 
+#fix
+
+# fix error from https://github.com/openwrt/luci/issues/5373
+# luci-app-statistics: misconfiguration shipped pointing to non-existent directory
+str="^[^#]*option Include '/etc/collectd/conf.d'"
+cmd="s@$str@#&@"
+sed -ri "$cmd" feeds/luci/applications/luci-app-statistics/root/etc/config/luci_statistics
+echo "Fix luci-app-statistics ref wrong path error"
+
+# fix stupid coremark benchmark error
+touch package/base-files/files/etc/bench.log
+chmod 0666 package/base-files/files/etc/bench.log
+echo "Touch coremark log file to fix uhttpd error!!!"
+
+# fixing dnsmasq v2.86 compile error
+# from: https://github.com/openwrt/openwrt/issues/9043
+dnsmasq_path="package/network/services/dnsmasq"
+dnsmasq_ver=$(grep -m1 'PKG_UPSTREAM_VERSION:=2.86' ${dnsmasq_path}/Makefile)
+if [ ! -z "${dnsmasq_ver}" ]; then
+    rm -rf $dnsmasq_path
+    mv -f package/dnsmasq ${dnsmasq_path}
+    echo "Try dnsmasq v2.89 for openwrt 22.03"
+else
+# upgrade nftables to version 1.0.5
+    nftables_path="package/network/utils/nftables"
+    nftables_ver=$(grep -m1 'PKG_VERSION:=0.9.6' ${nftables_path}/Makefile)
+    if [ ! -z "${nftables_ver}" ]; then
+        rm -rf package/network/utils/nftables
+        rm -rf package/libs/libnftnl
+        mv -f package/app/nftables package/network/utils/
+        mv -f package/app/libnftnl package/libs/
+        echo "try nftables version 1.0.8 for dnsmasq v2.87+"
+    fi
+fi
+
+# make minidlna depends on libffmpeg-full instead of libffmpeg
+# little bro ffmpeg mini custom be gone
+sed -i "s/libffmpeg /libffmpeg-full /g" feeds/packages/multimedia/minidlna/Makefile
+echo "Set minidlna depends on libffmpeg-full instead of libffmpeg"
+
+# make cshark depends on libustream-openssl instead of libustream-mbedtls
+# i fucking hate stupid mbedtls so much, be gone
+sed -i "s/libustream-mbedtls/libustream-openssl/g" feeds/packages/net/cshark/Makefile
+echo "Set cshark depends on libustream-openssl instead of libustream-mbedtls"
+
+# remove ipv6-helper depends on odhcpd*
+sed -i "s/+odhcpd-ipv6only//g" package/feeds/CustomPkgs/ipv6-helper/Makefile
+echo "Remove ipv6-helper depends on odhcpd*"
+
+# remove hnetd depends on odhcpd*
+sed -i "s/+odhcpd//g" package/feeds/routing/hnetd/Makefile
+echo "Remove hnetd depends on odhcpd*"
+
+# make shairplay depends on mdnsd instead of libavahi-compat-libdnssd
+sed -i "s/+libavahi-compat-libdnssd/+mdnsd/g" feeds/packages/sound/shairplay/Makefile
+echo "Set shairplay depends on mdnsd instead of libavahi-compat-libdnssd"
+
+# upgrade libtorrent-rasterbar to version 2.0.8
+RAS_PATH="feeds/packages/libs/libtorrent-rasterbar"
+RAS_VER=$(grep -m1 'PKG_VERSION:=2.0.7' ${RAS_PATH}/Makefile)
+if [ ! -z "${RAS_VER}" ]; then
+    rm -rf ${RAS_PATH}
+    mv -f package/app/libtorrent-rasterbar feeds/packages/libs/
+    echo "Try libtorrent-rasterbar v2.0.8 for qBittorrent"
+fi
+
+RRDTOOL_PATH="feeds/packages/utils/rrdtool1"
+RRDTOOL_URL=$(grep -m1 'PKG_SOURCE_URL:= \\' ${RRDTOOL_PATH}/Makefile)
+if [ ! -z "${RRDTOOL_URL}" ]; then
+    mv -f  package/patch/rrdtool1-Makefile ${RRDTOOL_PATH}/Makefile
+    echo "Fix rrdtool1 package url mirrors error"
+fi
+
+GD_PATH="feeds/packages/utils/gptfdisk"
+GD_VER=$(grep -m1 'PKG_VERSION:=1.0.9' ${GD_PATH}/Makefile)
+if [ ! -z "${GD_VER}" ]; then
+    sed -i '0,/^TARGET_CXXFLAGS.*/s/^TARGET_CXXFLAGS.*/TARGET_CFLAGS += -D_LARGEFILE64_SOURCE\n&/' ${GD_PATH}/Makefile
+    echo "Fix gptfdisk compile error"
+fi
+
+#fix end
+
+# Add model.sh to remove annoying board name for Intel J4125
+mv -f package/patch/model.sh package/base-files/files/etc/
+chmod 0755 package/base-files/files/etc/model.sh
+echo "Add model.sh"
+
+# Add 92-ula-prefix, try to set up IPv6 ula prefix after wlan up
+# and call model.sh
+mkdir -p package/base-files/files/etc/hotplug.d/iface
+mv -f package/patch/92-ula-prefix package/base-files/files/etc/hotplug.d/iface/
+chmod 0755 package/base-files/files/etc/hotplug.d/iface/92-ula-prefix
+echo "Add 92-ula-prefix"
+
+# Custom miniDLNA zh_Hans translation
+miniDLNA_PATH="feeds/luci/applications/luci-app-minidlna/po/zh_Hans"
+sed -i 's/迷你DLNA/miniDLNA/g' ${miniDLNA_PATH}/minidlna.po
+sed -i 's/迷你 SSDP 插座/miniSSDP 插座/g' ${miniDLNA_PATH}/minidlna.po
+echo "Custom miniDLNA zh_Hans translation"
+
+# Custom MJPG-streamer zh_Hans translation
+ms_PATH="feeds/luci/applications/luci-app-mjpg-streamer/po/zh_Hans"
+sed -i 's/MJPG-streamer(网络摄像机串流)/MJPG-streamer/g' ${ms_PATH}/mjpg-streamer.po
+echo "Custom MJPG-streamer zh_Hans translation"
+
+# Custom DDns zh_Hans translation
+ddns_PATH="feeds/luci/applications/luci-app-ddns/po/zh_Hans"
+sed -i 's/动态DNS 服务项/DDNS服务/g' ${ddns_PATH}/ddns.po
+sed -i 's/动态 DNS 版本/DDNS版本/g' ${ddns_PATH}/ddns.po
+sed -i 's/动态 DNS(DDNS)/DDNS/g' ${ddns_PATH}/ddns.po
+sed -i 's/动态DNS/DDNS/g' ${ddns_PATH}/ddns.po
+sed -i 's/动态 DNS/DDNS/g' ${ddns_PATH}/ddns.po
+echo "Custom DDNS zh_Hans translation"
+
+# Custom Shairplay zh_Hans translation
+sp_PATH="feeds/luci/applications/luci-app-shairplay/po/zh_Hans"
+sed -i 's/Shairplay(多媒体程序)/Shairplay/g' ${sp_PATH}/shairplay.po
+echo "Custom Shairplay zh_Hans translation"
+
+# Custom Samba4 zh_Hans translation
+SB_PATH="feeds/luci/applications/luci-app-samba4/po/zh_Hans"
+sed -i 's/网络共享/Samba4/g' ${SB_PATH}/samba4.po
+echo "Custom Samba4 zh_Hans translation"
+
+# Custom CloudShark zh_Hans translation
+CShark_PATH="feeds/luci/applications/luci-app-cshark/po/zh_Hans"
+sed -i 's/云鲨/CloudShark/g' ${CShark_PATH}/cshark.po
+echo "Custom CloudShark zh_Hans translation"
+
+# Add Port status zh_Hans translation
+LB_PATH="feeds/luci/modules/luci-base/po/zh_Hans"
+TLINE=$(grep -m1 -n '"Port status"' ${LB_PATH}/base.po |awk '{ print $1 }' |cut -d':' -f1)
+if [ -n "$TLINE" ]; then
+    DLINE=$((TLINE+1))
+    sed -i "${DLINE}d" ${LB_PATH}/base.po
+    sed -i "${TLINE}a msgstr \"网口状态\"" ${LB_PATH}/base.po
+    echo "Add Port status zh_Hans translation"
+fi
 
 #设置
 sed -i 's/option enabled.*/option enabled 0/' feeds/*/*/*/*/upnpd.config
