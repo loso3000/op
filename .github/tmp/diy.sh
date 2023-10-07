@@ -18,15 +18,17 @@ sed -i "s/ImmortalWrt/openwrt/" ./feeds/luci/modules/luci-mod-system/htdocs/luci
 
 #rm -rf ./package/emortal/autocore 
 #rm -rf  ./package/emortal/default-settings 
-rm -rf ./package/emortal2/autocore 
-rm -rf  ./package/emortal2/default-settings 
+#rm -rf ./package/emortal2/autocore 
+#rm -rf  ./package/emortal2/default-settings 
 #rm -rf  feeds/packages/net/wrtbwmon
 #rm -rf  ./feeds/luci/applications/luci-app-wrtbwmon 
 #rm -rf  ./feeds/luci/applications/luci-app-netdata
 rm -rf  ./feeds/packages/net/open-app-filter
 rm -rf  ./feeds/packages/net/oaf
 rm -rf  ./feeds/luci/applications/luci-app-appfilter
-rm -rf  package/js2
+#rm -rf  ./package/wget 
+rm -rf  ./feeds/packages/net/wget
+mv -rf ./package/wget  ./feeds/packages/net/wget
 cat  patch/banner > ./package/base-files/files/etc/banner
 cat  patch/profile > ./package/base-files/files/etc/profile
 cat  patch/profiles > ./package/base-files/files/etc/profiles
@@ -392,15 +394,15 @@ svn export https://github.com/loso3000/other/trunk/up/pass/luci-app-bypass ./pac
 rm ./package/luci-app-bypass/po/zh_Hans && mv ./package/luci-app-bypass/po/zh-cn ./package/luci-app-bypass/po/zh_Hans
 # sed -i 's,default n,default y,g' package/luci-app-bypass/Makefile
 
-# git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
-# git clone -b luci https://github.com/xiaorouji/openwrt-passwall package/passwall
-# git clone https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-passwall
+git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
+git clone -b luci https://github.com/xiaorouji/openwrt-passwall package/passwall
+git clone https://github.com/xiaorouji/openwrt-passwall.git package/openwrt-passwall
 
 # pushd package/passwall/luci-app-passwall
 # sed -i 's,default n,default y,g' Makefile
 # popd
 
-# svn export https://github.com/QiuSimons/OpenWrt-Add/trunk/trojan-plus package/new/trojan-plus
+#svn export https://github.com/QiuSimons/OpenWrt-Add/trunk/trojan-plus package/new/trojan-plus
 
 # rm -rf ./feeds/packages/net/xray-core
 # rm -rf ./feeds/packages/net/xray-plugin
@@ -441,6 +443,10 @@ sed -i 's/START=95/START=99/' `find package/ -follow -type f -path */ddns-script
 # find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/include\ \.\.\/\.\.\/luci\.mk/include \$(TOPDIR)\/feeds\/luci\/luci\.mk/g' {}
 # find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/include\ \.\.\/\.\.\/lang\/golang\/golang\-package\.mk/include \$(TOPDIR)\/feeds\/packages\/lang\/golang\/golang\-package\.mk/g' {}
 
+# 修复 hostapd 报错
+cp -f  ./patch/011-fix-mbo-modules-build.patch package/network/services/hostapd/patches/011-fix-mbo-modules-build.patch
+# 取消主题默认设置
+find package/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/set luci.main.mediaurlbase/d' {} \;
 sed -i '/check_signature/d' ./package/system/opkg/Makefile   # 删除IPK安装签名
 
 # sed -i 's/kmod-usb-net-rtl8152/kmod-usb-net-rtl8152-vendor/' target/linux/rockchip/image/armv8.mk target/linux/sunxi/image/cortexa53.mk target/linux/sunxi/image/cortexa7.mk
@@ -456,20 +462,23 @@ for sh_file in `ls ${GITHUB_WORKSPACE}/openwrt/common/*.sh`;do
     source $sh_file amd64
 done
 
-# echo '默认开启 Irqbalance'
-#ver1=`grep "KERNEL_PATCHVER:="  target/linux/x86/Makefile | cut -d = -f 2` #判断当前默认内核版本号如5.10
+if [[ $DATE_S == 'default' ]]; then
+   DATA=`TZ=UTC-8 date +%Y.%m.%d -d +"12"hour`
+else 
+   DATA=$DATE_S
+fi
+[[ -n $CONFIG_S ]] || CONFIG_S=Super
 VER1="$(grep "KERNEL_PATCHVER:="  ./target/linux/x86/Makefile | cut -d = -f 2)"
 ver54=`grep "LINUX_VERSION-5.4 ="  include/kernel-5.4 | cut -d . -f 3`
 ver515=`grep "LINUX_VERSION-5.15 ="  include/kernel-5.15 | cut -d . -f 3`
 ver61=`grep "LINUX_VERSION-6.1 ="  include/kernel-6.1 | cut -d . -f 3`
-
-date1="Super-VIP-"`TZ=UTC-8 date +%Y.%m.%d -d +"12"hour`"_by_Sirpdboy"
+date1="VIP-${CONFIG_S}-${DATA}_by_Sirpdboy"
 if [ "$VER1" = "5.4" ]; then
-date2="EzOpWrt Super-VIP-"`TZ=UTC-8 date +%Y.%m.%d -d +"12"hour`"-${VER1}.${ver54}_by_Sirpdboy"
+date2="EzOpWrt VIP-${CONFIG_S}-${DATA}-${VER1}.${ver54}_by_Sirpdboy"
 elif [ "$VER1" = "5.15" ]; then
-date2="EzOpWrt Super-VIP-"`TZ=UTC-8 date +%Y.%m.%d -d +"12"hour`"-${VER1}.${ver515}_by_Sirpdboy"
+date2="EzOpWrt VIP-${CONFIG_S}-${DATA}-${VER1}.${ver515}_by_Sirpdboy"
 elif [ "$VER1" = "6.1" ]; then
-date2="EzOpWrt Super-VIP-"`TZ=UTC-8 date +%Y.%m.%d -d +"12"hour`"-${VER1}.${ver61}_by_Sirpdboy"
+date2="EzOpWrt VIP-${CONFIG_S}-${DATA}-${VER1}.${ver61}_by_Sirpdboy"
 fi
 echo "${date1}" > ./package/base-files/files/etc/ezopenwrt_version
 echo "${date2}" >> ./package/base-files/files/etc/banner
@@ -500,19 +509,19 @@ ver61=`grep "LINUX_VERSION-6.1 ="  include/kernel-6.1 | cut -d . -f 3`
 sleep 2
 if [ "$VER1" = "5.4" ]; then
 mv  bin/targets/x86/64/*-x86-64-generic-squashfs-combined.img.gz       bin/targets/x86/64/EzOpenWrt-${r_version}_${VER1}.${ver54}-x86-64-combined.img.gz   
-mv  bin/targets/x86/64/*-x86-64-generic-squashfs-combined-efi.img.gz   bin/targets/x86/64/EzOpenWrt-${r_version}_${VER1}.${ver54}_x86-64-combined-efi.img.gz
+mv  bin/targets/x86/64/*-x86-64-generic-squashfs-combined-efi.img.gz   bin/targets/x86/64/EzOpenWrt-${r_version}_${VER1}.${ver54}-x86-64-combined-efi.img.gz
 md5_EzOpWrt=EzOpenWrt-${r_version}_${VER1}.${ver54}-x86-64-combined.img.gz   
-md5_EzOpWrt_uefi=EzOpenWrt-${r_version}_${VER1}.${ver54}_x86-64-combined-efi.img.gz
+md5_EzOpWrt_uefi=EzOpenWrt-${r_version}_${VER1}.${ver54}-x86-64-combined-efi.img.gz
 elif [ "$VER1" = "5.15" ]; then
 mv  bin/targets/x86/64/*-x86-64-generic-squashfs-combined.img.gz       bin/targets/x86/64/EzOpenWrt-${r_version}_${VER1}.${ver515}-x86-64-combined.img.gz   
-mv  bin/targets/x86/64/*-x86-64-generic-squashfs-combined-efi.img.gz   bin/targets/x86/64/EzOpenWrt-${r_version}_${VER1}.${ver515}_x86-64-combined-efi.img.gz
+mv  bin/targets/x86/64/*-x86-64-generic-squashfs-combined-efi.img.gz   bin/targets/x86/64/EzOpenWrt-${r_version}_${VER1}.${ver515}-x86-64-combined-efi.img.gz
 md5_EzOpWrt=EzOpenWrt-${r_version}_${VER1}.${ver515}-x86-64-combined.img.gz   
-md5_EzOpWrt_uefi=EzOpenWrt-${r_version}_${VER1}.${ver515}_x86-64-combined-efi.img.gz
+md5_EzOpWrt_uefi=EzOpenWrt-${r_version}_${VER1}.${ver515}-x86-64-combined-efi.img.gz
 elif [ "$VER1" = "6.1" ]; then
 mv  bin/targets/x86/64/*-x86-64-generic-squashfs-combined.img.gz       bin/targets/x86/64/EzOpenWrt-${r_version}_${VER1}.${ver61}-x86-64-combined.img.gz   
-mv  bin/targets/x86/64/*-x86-64-generic-squashfs-combined-efi.img.gz   bin/targets/x86/64/EzOpenWrt-${r_version}_${VER1}.${ver61}_x86-64-combined-efi.img.gz
+mv  bin/targets/x86/64/*-x86-64-generic-squashfs-combined-efi.img.gz   bin/targets/x86/64/EzOpenWrt-${r_version}_${VER1}.${ver61}-x86-64-combined-efi.img.gz
 md5_EzOpWrt=EzOpenWrt-${r_version}_${VER1}.${ver61}-x86-64-combined.img.gz   
-md5_EzOpWrt_uefi=EzOpenWrt-${r_version}_${VER1}.${ver61}_x86-64-combined-efi.img.gz
+md5_EzOpWrt_uefi=EzOpenWrt-${r_version}_${VER1}.${ver61}-x86-64-combined-efi.img.gz
 fi
 #md5
 cd bin/targets/x86/64
@@ -531,7 +540,7 @@ mkdir -p $kmoddirdrv 2>/dev/null
 mkdir -p $kmoddirdocker 2>/dev/null
 cp -rf ./patch/list.txt $bakkmodfile
 mkdir -p files/etc/uci-defaults/
-cp  patch/init-settings.sh files/etc/uci-defaults/99-init-settings
+cp -rf ./patch/init-settings.sh files/etc/uci-defaults/99-init-settings
 while IFS= read -r file; do
     a=`find ./bin/ -name "$file" `
     echo $a
@@ -583,5 +592,5 @@ EOF
 
 
 ./scripts/feeds update -i
-cat  ./x86_64/x86_64  > .config
+cat  ./x86_64/${CONFIG_S}  > .config
 #cat  ./x86_64/comm  >> .config
