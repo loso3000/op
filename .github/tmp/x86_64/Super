@@ -13,22 +13,8 @@ CONFIG_TARGET_ROOTFS_PARTSIZE=925
 
 CONFIG_GRUB_TIMEOUT="0"
 CONFIG_GRUB_TITLE="EzOpWrt"
-CONFIG_PACKAGE_libatomic=y
-CONFIG_PACKAGE_resolveip=y
-CONFIG_PACKAGE_sqm-scripts=y
-CONFIG_PACKAGE_htop=y
-CONFIG_HTOP_LMSENSORS=y
+# CONFIG_HTOP_LMSENSORS=y
 CONFIG_PACKAGE_kmod-nvme=y
-CONFIG_PACKAGE_kmod-crypto-ccm=y
-CONFIG_PACKAGE_kmod-crypto-cmac=y
-CONFIG_PACKAGE_kmod-crypto-ctr=y
-CONFIG_PACKAGE_kmod-crypto-gcm=y
-CONFIG_PACKAGE_kmod-crypto-gf128=y
-CONFIG_PACKAGE_kmod-crypto-ghash=y
-CONFIG_PACKAGE_kmod-crypto-hmac=y
-CONFIG_PACKAGE_kmod-crypto-rng=y
-CONFIG_PACKAGE_kmod-crypto-seqiv=y
-CONFIG_PACKAGE_kmod-crypto-sha256=y
 CONFIG_PACKAGE_kmod-fs-nfs=y
 CONFIG_PACKAGE_kmod-fs-nfs-common=y
 CONFIG_PACKAGE_kmod-fs-nfs-v3=y
@@ -56,8 +42,6 @@ CONFIG_PACKAGE_kmod-pppol2tp=y
 CONFIG_PACKAGE_kmod-pptp=y
 CONFIG_PACKAGE_kmod-sched-cake=y
 CONFIG_PACKAGE_kmod-sched-core=y
-CONFIG_PACKAGE_kmod-udptunnel4=y
-CONFIG_PACKAGE_kmod-udptunnel6=y
 CONFIG_PACKAGE_kmod-lp=y
 CONFIG_PACKAGE_kmod-ppdev=y
 CONFIG_PACKAGE_kmod-thermal=y
@@ -77,50 +61,12 @@ CONFIG_PACKAGE_kmod-usb2-pci=y
 CONFIG_PACKAGE_kmod-usb3=y
 CONFIG_PACKAGE_kmod-usbip=y
 CONFIG_PACKAGE_kmod-ath=y
-CONFIG_ATH_USER_REGD=y
-CONFIG_PACKAGE_ATH_DFS=y
-CONFIG_PACKAGE_libimobiledevice=y
-CONFIG_PACKAGE_libplist=y
-CONFIG_PACKAGE_libusbmuxd=y
-CONFIG_PACKAGE_bind-libs=y
 CONFIG_PACKAGE_libcap=y
-CONFIG_PACKAGE_libcurl=y
-#
-# SSL support
-#
-CONFIG_LIBCURL_OPENSSL=y
-#
-# Supported protocols
-#
-CONFIG_LIBCURL_FILE=y
-CONFIG_LIBCURL_FTP=y
-CONFIG_LIBCURL_HTTP=y
-CONFIG_LIBCURL_COOKIES=y
-CONFIG_LIBCURL_TFTP=y
-CONFIG_LIBCURL_NGHTTP2=y
-#
+
 # Miscellaneous
-#
-CONFIG_LIBCURL_PROXY=y
-CONFIG_LIBCURL_CRYPTO_AUTH=y
-CONFIG_LIBCURL_TLS_SRP=y
-CONFIG_LIBCURL_THREADED_RESOLVER=y
-CONFIG_LIBCURL_UNIX_SOCKETS=y
-CONFIG_PACKAGE_libevdev=y
-CONFIG_PACKAGE_libmount=y
-CONFIG_PACKAGE_libnetsnmp=y
-CONFIG_PACKAGE_libnghttp2=y
-CONFIG_PACKAGE_libpci=y
-CONFIG_PACKAGE_libreadline=y
-CONFIG_PACKAGE_libudev-zero=y
-CONFIG_PACKAGE_libusb-1.0=y
-CONFIG_PACKAGE_libuv=y
-CONFIG_PACKAGE_libxml2=y
-CONFIG_PACKAGE_curl=y
 CONFIG_PACKAGE_ip6tables-extra=y
 CONFIG_PACKAGE_iptables-mod-conntrack-extra=y
 CONFIG_PACKAGE_iptables-mod-ipopt=y
-# CONFIG_PACKAGE_miniupnpd=y  #error log
 CONFIG_PACKAGE_bind-host=y
 CONFIG_PACKAGE_ddns-scripts=y
 CONFIG_PACKAGE_ddns-scripts-cloudflare=y
@@ -135,6 +81,8 @@ CONFIG_PACKAGE_tc-tiny=y
 CONFIG_PACKAGE_openssh-sftp-client=y
 CONFIG_PACKAGE_openssh-sftp-server=y
 
+CONFIG_PACKAGE_curl=y
+CONFIG_PACKAGE_htop=y
 CONFIG_PACKAGE_ppp-mod-pppol2tp=y
 CONFIG_PACKAGE_ppp-mod-pptp=y
 CONFIG_PACKAGE_xl2tpd=y
@@ -353,7 +301,6 @@ CONFIG_PACKAGE_kmod-usb3=y
 CONFIG_PACKAGE_kmod-usbip=y
 CONFIG_PACKAGE_kmod-usb-ohci=y
 CONFIG_PACKAGE_kmod-usb-ohci-pci=y
-
 
 ### Docker
 #CONFIG_DOCKER_CGROUP_OPTIONS=y
