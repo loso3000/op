@@ -490,7 +490,7 @@ echo '---------------------------------' >> ./package/base-files/files/etc/banne
 
 cat>buildmd5.sh<<-\EOF
 #!/bin/bash
-rm -rf  bin/targets/x86/64/config.buildinfo
+# rm -rf $(find ./bin/targets/ -iregex ".*\(json\|manifest\|buildinfo\|sha256sums\|packages\)$")rm -rf  bin/targets/x86/64/config.buildinfo
 rm -rf  bin/targets/x86/64/feeds.buildinfo
 rm -rf  bin/targets/x86/64/*x86-64-generic-kernel.bin
 rm -rf  bin/targets/x86/64/*x86-64-generic-squashfs-rootfs.img.gz
