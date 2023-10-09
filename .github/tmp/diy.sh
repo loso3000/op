@@ -13,13 +13,15 @@ config_generate=package/base-files/files/bin/config_generate
 sed -i "s/ImmortalWrt/OpenWrt/" {package/base-files/files/bin/config_generate,include/version.mk}
 sed -i "s/ImmortalWrt/openwrt/" ./feeds/luci/modules/luci-mod-system/htdocs/luci-static/resources/view/system/flash.js  #改登陆域名
 #删除冲突插件
-#rm -rf $(find ./feeds/luci/ -type d -regex ".*\(argon\|design\|openclash\).*")
+rm -rf $(find ./feeds/luci/ -type d -regex ".*\(argon\|design\|openclash\).*")
 # rm -rf $(find ./package/emortal/ -type d -regex ".*\(autocore\|default-settings\).*")
 
+rm -rf feeds/packages/prometheus-node-exporter-lua
 rm -rf ./package/emortal/autocore 
 rm -rf  ./package/emortal/default-settings 
-#rm -rf ./package/emortal2/autocore 
-#rm -rf  ./package/emortal2/default-settings 
+mv -rf ./package/emortal2/autocore  ./package/emortal/autocore 
+mv -rf  ./package/emortal2/default-settings   ./package/emortal/default-settings 
+
 rm -rf  feeds/packages/net/wrtbwmon
 rm -rf  ./feeds/luci/applications/luci-app-wrtbwmon 
 #rm -rf  ./feeds/luci/applications/luci-app-netdata
@@ -29,6 +31,7 @@ rm -rf  ./feeds/luci/applications/luci-app-appfilter
 #rm -rf  ./package/wget 
 rm -rf  ./feeds/packages/net/wget
 mv -rf ./package/wget  ./feeds/packages/net/wget
+
 cat  patch/banner > ./package/base-files/files/etc/banner
 cat  patch/profile > ./package/base-files/files/etc/profile
 cat  patch/profiles > ./package/base-files/files/etc/profiles
