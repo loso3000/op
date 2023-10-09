@@ -15,7 +15,7 @@ sed -i "s/ImmortalWrt/openwrt/" ./feeds/luci/modules/luci-mod-system/htdocs/luci
 #删除冲突插件
 rm -rf $(find ./feeds/luci/ -type d -regex ".*\(argon\|design\|openclash\).*")
 # rm -rf $(find ./package/emortal/ -type d -regex ".*\(autocore\|default-settings\).*")
-
+rm -rf package/feeds/packages/prometheus-node-exporter-lua
 rm -rf feeds/packages/prometheus-node-exporter-lua
 # rm -rf ./package/emortal/autocore 
 # rm -rf  ./package/emortal/default-settings 
