@@ -22,7 +22,7 @@ rm -rf  ./package/emortal/default-settings
 mv -rf ./package/emortal2/autocore  ./package/emortal/autocore 
 mv -rf  ./package/emortal2/default-settings   ./package/emortal/default-settings 
 # rm -rf ./package/emortal2
-rm -rf  package/js2
+#rm -rf  package/js2
 
 rm -rf  feeds/packages/net/wrtbwmon
 rm -rf  ./feeds/luci/applications/luci-app-wrtbwmon 
