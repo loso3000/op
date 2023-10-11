@@ -17,11 +17,11 @@ sed -i "s/ImmortalWrt/openwrt/" ./feeds/luci/modules/luci-mod-system/htdocs/luci
 # rm -rf $(find ./package/emortal/ -type d -regex ".*\(autocore\|default-settings\).*")
 rm -rf package/feeds/packages/prometheus-node-exporter-lua
 rm -rf feeds/packages/prometheus-node-exporter-lua
-# rm -rf ./package/emortal/autocore 
-# rm -rf  ./package/emortal/default-settings 
-# mv -rf ./package/emortal2/autocore  ./package/emortal/autocore 
-# mv -rf  ./package/emortal2/default-settings   ./package/emortal/default-settings 
-rm -rf ./package/emortal2
+rm -rf ./package/emortal/autocore 
+rm -rf  ./package/emortal/default-settings 
+mv -rf ./package/emortal2/autocore  ./package/emortal/autocore 
+mv -rf  ./package/emortal2/default-settings   ./package/emortal/default-settings 
+# rm -rf ./package/emortal2
 rm -rf  package/js2
 
 rm -rf  feeds/packages/net/wrtbwmon
