@@ -411,3 +411,12 @@ CONFIG_boost-compile-visibility-hidden=y
 CONFIG_boost-runtime-shared=y
 CONFIG_boost-static-and-shared-libs=y
 CONFIG_boost-variant-release=y
+
+
+CONFIG_LUCI_LANG_en=y
+#CONFIG_LUCI_LANG_zh-cn=y
+CONFIG_LUCI_LANG_zh_Hans=y
+CONFIG_PACKAGE_autocore-x86=y
+CONFIG_PACKAGE_default-settings=y
+CONFIG_PACKAGE_default-settings-chn=y
+CONFIG_PACKAGE_automount=y
