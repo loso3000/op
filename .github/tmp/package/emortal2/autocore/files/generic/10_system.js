@@ -3,10 +3,6 @@
 'require fs';
 'require rpc';
 
-var callLuciVersion = rpc.declare({
-	object: 'luci',
-	method: 'getVersion'
-});
 var callSystemBoard = rpc.declare({
 	object: 'system',
 	method: 'board'
@@ -48,7 +44,7 @@ return baseclass.extend({
 			L.resolveDefault(callCPUInfo(), {}),
 			L.resolveDefault(callCPUUsage(), {}),
 			L.resolveDefault(callTempInfo(), {}),
-			L.resolveDefault(callLuciVersion(), { revision: _('unknown version'), branch: 'LuCI' })
+			fs.lines('/usr/lib/lua/luci/version.lua')
 		]);
 	},
 
@@ -61,7 +57,11 @@ return baseclass.extend({
 		    tempinfo    = data[5],
 		    luciversion = data[6];
 
-		luciversion = luciversion.branch + ' ' + luciversion.revision;
+		luciversion = luciversion.filter(function(l) {
+			return l.match(/^\s*(luciname|luciversion)\s*=/);
+		}).map(function(l) {
+			return l.replace(/^\s*\w+\s*=\s*['"]([^'"]+)['"].*$/, '$1');
+		}).join(' ');
 
 		var datestr = null;
 
