@@ -6,6 +6,12 @@ user() {
     wans=$(ip route 2>/dev/null |grep -c '^default') && arps=$(cat /proc/net/arp 2>/dev/null | grep -c '0x2') && echo "$((arps-wans))"
 }
 
+archinfo() {
+. /etc/openwrt_release
+if grep -Eq "x86" "/etc/openwrt_release" ; then
+	[ ! -d /sys/firmware/efi ] &&  echo -n "BIOS" || echo -n "UEFI"
+fi
+}
 memory() {
 free | grep Mem | awk '{a=$2/1000;b=(a>800)?a/1000:a;c=(a>800)?"G":"M"} {printf("%0.f%s\n",b,c)}' 
 }
@@ -124,37 +130,16 @@ url() {
 	fi
 }
 
-armtempinfo() {
-IEEE_PATH="/sys/class/ieee80211"
-THERMAL_PATH="/sys/class/thermal"
-
-if grep -Eq "ipq40xx|ipq806x" "/etc/openwrt_release"; then
-	wifi_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' "$IEEE_PATH"/phy*/device/hwmon/hwmon*/temp1_input | awk '$1=$1')"
-else
-	wifi_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' "$IEEE_PATH"/phy*/hwmon*/temp1_input | awk '$1=$1')"
-fi
-
-if grep -q "ipq40xx" "/etc/openwrt_release"; then
-	if [ -e "$IEEE_PATH/phy0/hwmon0/temp1_input" ]; then
-		mt76_temp=" $(awk -F ': ' '{print $2}' "$IEEE_PATH/phy0/hwmon0/temp1_input")°C"
-	fi
-
-	echo -n "WiFi:${mt76_temp} ${wifi_temp}"
-else
-	cpu_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' "$THERMAL_PATH/thermal_zone0/temp")"
-	echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp}"
-fi
 
 
-}
 
-sensorsbin(){
-	ret=$(which sensors)
-	echo ${ret:=0}
-}
+
+
+
 
 tempinfo(){
 . /etc/openwrt_release
+if grep -Eq "x86" "/etc/openwrt_release" ; then
 case "$DISTRIB_TARGET" in
 "bcm27xx"/*)
 	cpu_temp="$(vcgencmd measure_temp | awk -F '=' '{print $2}' | awk -F "'" '{print $1}')°C" ;;
@@ -173,7 +158,24 @@ case "$DISTRIB_TARGET" in
 	;;
 esac
     echo -n "${cpu_temp}"
-
+else
+	IEEE_PATH="/sys/class/ieee80211"
+	THERMAL_PATH="/sys/class/thermal"
+	if grep -Eq "ipq40xx|ipq806x" "/etc/openwrt_release"; then
+		wifi_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' "$IEEE_PATH"/phy*/device/hwmon/hwmon*/temp1_input | awk '$1=$1')"
+	else
+		wifi_temp="$(awk '{printf("%.1f°C ", $0 / 1000)}' "$IEEE_PATH"/phy*/hwmon*/temp1_input | awk '$1=$1')"
+	fi
+	if grep -q "ipq40xx" "/etc/openwrt_release"; then
+		if [ -e "$IEEE_PATH/phy0/hwmon0/temp1_input" ]; then
+			mt76_temp=" $(awk -F ': ' '{print $2}' "$IEEE_PATH/phy0/hwmon0/temp1_input")°C"
+		fi
+		echo -n "WiFi:${mt76_temp} ${wifi_temp}"
+	else
+		cpu_temp="$(awk '{printf("%.1f°C", $0 / 1000)}' "$THERMAL_PATH/thermal_zone0/temp")"
+		echo -n "CPU: ${cpu_temp}, WiFi: ${wifi_temp}"
+	fi
+fi
 }
 
 upnpinfo() {
