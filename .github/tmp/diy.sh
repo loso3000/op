@@ -403,10 +403,10 @@ svn export https://github.com/vernesong/OpenClash/trunk/luci-app-openclash ./pac
 # svn export https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash package/new/luci-app-openclash
 # sed -i 's/+libcap /+libcap +libcap-bin /' package/new/luci-app-openclash/Makefile
 
-rm -rf  ./feeds/luci/applications/luci-app-passwall
+# rm -rf  ./feeds/luci/applications/luci-app-passwall
 rm -rf  ./feeds/luci/applications/luci-app-passwall2
 git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
-git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
+# git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
 
 # rm -rf ./feeds/packages/net/sing-box
 # git clone https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
