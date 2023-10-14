@@ -403,23 +403,19 @@ git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
 
 git clone https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
 rm -rf ./package/openwrt-passwall/trojan-plus
+rm -rf ./feeds/packages/net/sing-box
 rm -rf ./feeds/packages/net/trojan-plus
 svn export https://github.com/QiuSimons/OpenWrt-Add/trunk/trojan-plus package/new/trojan-plus
-rm -rf ./feeds/luci/applications/luci-app-passwall  package/feeds/packages/luci-app-passwall
+
 svn export https://github.com/fw876/helloworld/trunk/shadow-tls package/new/shadow-tls
-svn export https://github.com/fw876/helloworld/trunk/tuic-client package/new/tuic-client
+# svn export https://github.com/fw876/helloworld/trunk/tuic-client package/new/tuic-client
 
 #bypass
 svn export https://github.com/loso3000/other/trunk/up/pass ./package/pass
 rm ./package/pass/luci-app-bypass/po/zh_Hans && mv ./package/pass/luci-app-bypass/po/zh-cn ./packag/passe/luci-app-bypass/po/zh_Hans
 rm ./package/pass/luci-app-ssr-plus/po/zh_Hans && mv ./package/pass/luci-app-ssr-plus/po/zh-cn ./packag/passe/luci-app-ssr-plus/po/zh_Hans
-
 # sed -i 's,default n,default y,g' package/luci-app-bypass/Makefile
-# pushd package/passwall/luci-app-passwall
-# sed -i 's,default n,default y,g' Makefile
-# popd
 
-#svn export https://github.com/QiuSimons/OpenWrt-Add/trunk/trojan-plus package/new/trojan-plus
 
 # 在 X86 架构下移除 Shadowsocks-rust
 sed -i '/Rust:/d' package/passwall/luci-app-passwall/Makefile
