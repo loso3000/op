@@ -14,13 +14,14 @@ sed -i "s/ImmortalWrt/OpenWrt/" {package/base-files/files/bin/config_generate,in
 sed -i "s/ImmortalWrt/openwrt/" ./feeds/luci/modules/luci-mod-system/htdocs/luci-static/resources/view/system/flash.js  #改登陆域名
 #删除冲突插件
 # rm -rf $(find ./feeds/luci/ -type d -regex ".*\(argon\|design\|openclash\).*")
-# rm -rf $(find ./package/emortal/ -type d -regex ".*\(autocore\|default-settings\).*")
 rm -rf package/feeds/packages/prometheus-node-exporter-lua
 rm -rf feeds/packages/prometheus-node-exporter-lua
-rm -rf ./package/emortal/autocore 
-rm -rf  ./package/emortal/default-settings 
+
+rm -rf $(find ./package/emortal/ -type d -regex ".*\(autocore\|automount\|autosamba\|default-settings\).*")
 mv -rf ./package/emortal2/autocore  ./package/emortal/autocore 
 mv -rf  ./package/emortal2/default-settings   ./package/emortal/default-settings 
+mv -rf  ./package/emortal2/automount   ./package/emortal/automount
+mv -rf  ./package/emortal2/autosamba   ./package/emortal/autosamba
 # rm -rf ./package/emortal2
 #rm -rf  package/js2
 
