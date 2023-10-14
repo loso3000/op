@@ -408,9 +408,9 @@ rm -rf  ./feeds/luci/applications/luci-app-passwall2
 git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
 git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
 
-git clone https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
-rm -rf ./package/openwrt-passwall/trojan-plus
-rm -rf ./feeds/packages/net/sing-box
+# rm -rf ./feeds/packages/net/sing-box
+# git clone https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
+# rm -rf ./package/openwrt-passwall/trojan-plus
 rm -rf ./feeds/packages/net/trojan-plus
 svn export https://github.com/QiuSimons/OpenWrt-Add/trunk/trojan-plus package/new/trojan-plus
 
