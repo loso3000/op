@@ -12,6 +12,7 @@ if grep -Eq "x86" "/etc/openwrt_release" ; then
 	[ ! -d /sys/firmware/efi ] &&  echo -n "BIOS" || echo -n "UEFI"
 fi
 }
+
 memory() {
 free | grep Mem | awk '{a=$2/1000;b=(a>800)?a/1000:a;c=(a>800)?"G":"M"} {printf("%0.f%s\n",b,c)}' 
 }
@@ -130,13 +131,6 @@ url() {
 	fi
 }
 
-
-
-
-
-
-
-
 tempinfo(){
 . /etc/openwrt_release
 if grep -Eq "x86" "/etc/openwrt_release" ; then
@@ -189,7 +183,6 @@ upnpinfo() {
 }
 
 ethinfo() {
-
     [ ! -d /tmp/state ] && mkdir -p /tmp/state 2>/dev/null
     sed -i '/_orig_ifname/d' /etc/config/network
     {

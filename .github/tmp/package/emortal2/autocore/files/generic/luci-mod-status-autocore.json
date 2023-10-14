@@ -3,7 +3,15 @@
 		"description": "Grant access to autocore",
 		"read": {
 			"ubus": {
-				"luci": [ "getCPUInfo", "getETHInfo", "getTempInfo" ]
+				"luci": [ "getCPUInfo", "getETHInfo", "getTempInfo", "getCpuData"]
+			}
+		}
+	}
+	"luci-mod-cpu-status": {
+		"description": "Grant access to cpu-status procedures",
+		"read": {
+			"file": {
+				"/proc/stat": [ "read" ]
 			}
 		}
 	}

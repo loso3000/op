@@ -55,6 +55,7 @@ define Package/autocore/install/Default
 
 	$(INSTALL_DIR) $(1)/www/luci-static/resources/view/status/include
 	$(INSTALL_DATA) ./files/generic/21_ethinfo.js $(1)/www/luci-static/resources/view/status/include/
+	$(INSTALL_DATA) ./files/generic/19_cpu.js $(1)/www/luci-static/resources/view/status/include/
 endef
 
 define Package/autocore-arm/install

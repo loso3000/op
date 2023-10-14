@@ -566,23 +566,21 @@ const methods = {
 
 	getCPUUsage: {
 		call: function() {
-			const fd = popen('busybox top -n1 | awk \'/^CPU/ {printf("%d%", 100 - $8)}\'');
+			const fd = popen('/sbin/sysinfo archinfo');
 			if (fd) {
 				let cpuusage = fd.read('all');
 				if (!cpuusage)
-					cpuusage = '?';
+					return {};
 				fd.close();
 
 				return { cpuusage: cpuusage };
 			} else {
-				return { cpuusage: error() };
+				return {};
 			}
 		}
 	},
-
 	getETHInfo: {
 		call: function() {
-
 			const fd = popen('/sbin/sysinfo ethinfo');
 			if (fd) {
 				let ethinfo = fd.read('all');
@@ -590,43 +588,36 @@ const methods = {
 					ethinfo = '{}';
 				ethinfo = json(ethinfo);
 				fd.close();
-
 				return { ethinfo: ethinfo };
 			} else {
 				return { ethinfo: error() };
 			}
 		}
 	},
-
 	getTempInfo: {
 		call: function() {
-			if (!access('/sbin/tempinfo'))
-				return {};
-			const fd = popen('/sbin/tempinfo');
+			const fd = popen('/sbin/sysinfo tempinfo');
 			if (fd) {
 				let tempinfo = fd.read('all');
 				if (!tempinfo)
-					tempinfo = '?';
+					return {};
 				fd.close();
 
 				return { tempinfo: tempinfo };
 			} else {
-				return { tempinfo: error() };
+				return {};
 			}
+
 		}
 	},
-
 	getOnlineUsers: {
 		call: function() {
 			const fd = popen('/sbin/sysinfo user');
 			if (fd) {
-
 				let onlineusers = fd.read('all');
 				if (!onlineusers)
 					onlineusers = 0;
 				fd.close();
-
-
 				return { onlineusers: onlineusers };
 			} else {
 				return { onlineusers: error() };

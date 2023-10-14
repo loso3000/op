@@ -19,7 +19,6 @@ return L.Class.extend({
 
 	render: function(data) {
 		var ethinfo = Array.isArray(data[0].ethinfo) ? data[0].ethinfo : [];
-
 		var table = E('table', { 'class': 'table' }, [
 			E('tr', { 'class': 'tr table-titles' }, [
 				E('th', { 'class': 'th' }, _('Ethernet Name')),

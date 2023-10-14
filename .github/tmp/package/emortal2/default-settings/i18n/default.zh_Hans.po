@@ -20,7 +20,13 @@ msgid "CPU frequency"
 msgstr "CPU 频率"
 
 msgid "CPU usage"
-msgstr "CPU 使用率"
+msgstr "CPU 负载"
+
+msgid "CPU Load"
+msgstr "CPU 负载"
+
+msgid "Total usage"
+msgstr "CPU 总负载"
 
 msgid "RAM frequency"
 msgstr "RAM 频率"

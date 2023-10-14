@@ -7,6 +7,7 @@ var callLuciVersion = rpc.declare({
 	object: 'luci',
 	method: 'getVersion'
 });
+
 var callSystemBoard = rpc.declare({
 	object: 'system',
 	method: 'board'
@@ -82,7 +83,7 @@ return baseclass.extend({
 			_('Hostname'),         boardinfo.hostname,
 			_('Model'),            boardinfo.model + cpubench.cpubench,
 			_('Architecture'),     cpuinfo.cpuinfo,
-			_('Target Platform'),  (L.isObject(boardinfo.release) ? boardinfo.release.target : ''),
+			_('Target Platform'),  (L.isObject(boardinfo.release) ? boardinfo.release.target + ' ' : '')  + (cpuusage.cpuusage || ''),
 			_('Firmware Version'), (L.isObject(boardinfo.release) ? boardinfo.release.description + ' / ' : '') + (luciversion || ''),
 			_('Kernel Version'),   boardinfo.kernel,
 			_('Local Time'),       datestr,
@@ -92,7 +93,6 @@ return baseclass.extend({
 				systeminfo.load[1] / 65535.0,
 				systeminfo.load[2] / 65535.0
 			) : null,
-			_('CPU usage'),    cpuusage.cpuusage
 		];
 
 		if (tempinfo.tempinfo) {
