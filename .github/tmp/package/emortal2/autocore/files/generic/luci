@@ -570,12 +570,12 @@ const methods = {
 			if (fd) {
 				let cpuusage = fd.read('all');
 				if (!cpuusage)
-					cpuusage = '?';
+					return {};
 				fd.close();
 
 				return { cpuusage: cpuusage };
 			} else {
-				return { cpuusage: error() };
+				return {};
 			}
 		}
 	},
