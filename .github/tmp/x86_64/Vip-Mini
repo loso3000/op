@@ -11,7 +11,7 @@ CONFIG_GNUTLS_DTLS_SRTP=y
 CONFIG_GNUTLS_HEARTBEAT=y
 CONFIG_GNUTLS_OCSP=y
 CONFIG_GNUTLS_PSK=y
-# CONFIG_GRUB_IMAGES is not set
+CONFIG_GRUB_IMAGES=y
 CONFIG_GRUB_TITLE="EzOpWrt Built By Sirpdboy"
 CONFIG_IMAGEOPT=y
 CONFIG_LIBCURL_COOKIES=y
@@ -355,6 +355,7 @@ CONFIG_PACKAGE_autocore=y
 CONFIG_PACKAGE_default-settings=y
 CONFIG_PACKAGE_default-settings-chn=y
 CONFIG_PACKAGE_automount=y
+CONFIG_PACKAGE_autosamba=y
 
 # CONFIG_PACKAGE_luci-proto-wireguard=y
 CONFIG_PACKAGE_luci-theme-bootstrap=y
@@ -372,7 +373,7 @@ CONFIG_PACKAGE_luci-theme-material=y
 # CONFIG_PACKAGE_luci-app-mjpg-streamer is not set
 # CONFIG_PACKAGE_luci-app-openvpn is not set
 # CONFIG_PACKAGE_luci-app-qbittorrent is not set
-CONFIG_PACKAGE_luci-app-shairplay=y
+CONFIG_PACKAGE_luci-app-shairplay=n
 # CONFIG_PACKAGE_luci-app-statistics=n
 # CONFIG_PACKAGE_luci-app-temp-status=n
 CONFIG_PACKAGE_luci-app-ttyd=y
@@ -402,10 +403,12 @@ CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Shadowsocks_Rust_Server=y
 CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Xray is not set
 
-CONFIG_PACKAGE_luci-app-adguardhome=y
+CONFIG_PACKAGE_luci-app-daed=y
 CONFIG_PACKAGE_luci-app-bypass=y
+CONFIG_PACKAGE_luci-app-vssr=y
 CONFIG_PACKAGE_luci-app-openclash=y
 ### APPS
+CONFIG_PACKAGE_luci-app-adguardhome=y
 CONFIG_PACKAGE_luci-app-advancedplus=y
 CONFIG_PACKAGE_luci-app-eqosplus=y
 CONFIG_PACKAGE_luci-app-poweroffdevice=y
@@ -418,11 +421,8 @@ CONFIG_PACKAGE_luci-app-arpbind=y
 CONFIG_PACKAGE_luci-app-wolplus=y
 CONFIG_PACKAGE_luci-app-netdata=y
 CONFIG_PACKAGE_luci-app-partexp=y
-
-
-CONFIG_PACKAGE_luci-app-diskman=y
+CONFIG_PACKAGE_luci-app-ddns-go=y
 CONFIG_PACKAGE_luci-app-samba4=y
-# CONFIG_PACKAGE_luci-app-daed is not set
 CONFIG_PACKAGE_luci-app-mwan3=y
 CONFIG_PACKAGE_luci-app-syncdial=y
 CONFIG_PACKAGE_luci-app-uugamebooster=y
