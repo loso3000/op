@@ -24,10 +24,15 @@ mv -rf  ./package/emortal2/default-settings   ./package/emortal/default-settings
 mv -rf  ./package/emortal2/automount   ./package/emortal/automount
 mv -rf  ./package/emortal2/autosamba   ./package/emortal/autosamba
 
-#if [ "$CONFIG_S" = "Mini" || "$CONFIG_S" = "Super" ] ; then
+if [ ${CONFIG_S} = "Mini" || ${CONFIG_S} = "Super" ] ; then
+  
+sed -i 's/nas/services/g' ./feeds/luci/applications/luci-app-zerotier/root/usr/share/luci/menu.d/luci-app-zerotier.json
+fi
+
+sed -i 's/status/services/g' ./feeds/luci/applications/luci-app-nlbwmon/root/usr/share/luci/menu.d/luci-app-nlbwmon.json
 #samba4
-  sed -i 's/nas/services/g' ./feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
-#fi
+sed -i 's/nas/services/g' ./feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
+
 # rm -rf ./package/emortal2
 #rm -rf  package/js2
 
@@ -291,19 +296,6 @@ echo '替换smartdns'
 # rm -rf ./feeds/packages/net/smartdns package/feeds/packages/smartdns
 # svn export https://github.com/sirpdboy/sirpdboy-package/trunk/smartdns ./feeds/packages/net/smartdns
 
-
-# netdata 
-#rm -rf ./feeds/luci/applications/luci-app-netdata package/feeds/packages/luci-app-netdata
-# rm -rf ./feeds/packages/admin/netdata
-#svn export https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-netdata ./feeds/luci/applications/luci-app-netdata
-# svn export https://github.com/loso3000/mypk/trunk/up/netdata ./feeds/packages/admin/netdata
-#ln -sf ../../../feeds/luci/applications/luci-app-netdata ./package/feeds/luci/luci-app-netdata
-
-#rm -rf ./feeds/luci/applications/luci-app-arpbind
-#svn export https://github.com/loso3000/other/trunk/up/luci-app-arpbind ./feeds/luci/applications/luci-app-arpbind 
-#ln -sf ../../../feeds/luci/applications/luci-app-arpbind ./package/feeds/luci/luci-app-arpbind
-#rm -rf ./package/other/up/luci-app-arpbind
-
 # Add luci-app-dockerman
 # rm -rf ./feeds/luci/applications/luci-app-dockerman
 # rm -rf ./feeds/luci/applications/luci-app-docker
@@ -345,13 +337,6 @@ rm -rf ./feeds/luci/applications/aliyundrive-webdav
 # svn export https://github.com/openwrt/packages/trunk/net/zerotier feeds/packages/net/zerotier
 # rm -rf ./feeds/packages/net/zerotier/files/etc/init.d/zerotier
 
-# rm -rf ./feeds/packages/net/softethervpn5 package/feeds/packages/softethervpn5
-# svn export https://github.com/loso3000/other/trunk/up/softethervpn5 ./feeds/packages/net/softethervpn5
-
-# rm -rf ./feeds/luci/applications/luci-app-socat  ./package/feeds/luci/luci-app-socat
-# svn export https://github.com/sirpdboy/sirpdboy-package/trunk/luci-app-socat ./feeds/luci/applications/luci-app-socat
-# ln -sf ../../../feeds/luci/applications/luci-app-socat ./package/feeds/luci/luci-app-socat
-
 sed -i 's/msgstr "Socat"/msgstr "端口转发"/g' ./feeds/luci/applications/luci-app-socat/po/*/socat.po
 
 sed -i 's/"Argon 主题设置"/"Argon设置"/g' `grep "Argon 主题设置" -rl ./`
@@ -363,6 +348,7 @@ sed -i 's/实时流量监测/流量/g'  `grep "实时流量监测" -rl ./`
 sed -i 's/解锁网易云灰色歌曲/解锁灰色歌曲/g'  `grep "解锁网易云灰色歌曲" -rl ./`
 sed -i 's/解除网易云音乐播放限制/解锁灰色歌曲/g'  `grep "解除网易云音乐播放限制" -rl ./`
 sed -i 's/家庭云//g'  `grep "家庭云" -rl ./`
+sed -i 's/MultiWAN 管理器/负载均衡/g'  `grep "MultiWAN 管理器" -rl ./`
 
 sed -i 's/监听端口/监听端口 用户名admin密码adminadmin/g' ./feeds/luci/applications/luci-app-qbittorrent/po/*/qbittorrent.po
 # echo  "        option tls_enable 'true'" >> ./feeds/luci/applications/luci-app-frpc/root/etc/config/frp   #FRP穿透问题
@@ -387,7 +373,6 @@ sed -i 's/option commit_interval.*/option commit_interval 1h/g' feeds/packages/n
 
 # echo '默认开启 Irqbalance'
 sed -i "s/enabled '0'/enabled '1'/g" feeds/packages/utils/irqbalance/files/irqbalance.config
-
 
 # Fix libssh
 # rm -rf feeds/packages/libs
