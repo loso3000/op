@@ -409,10 +409,11 @@ svn export https://github.com/fw876/helloworld/trunk/shadow-tls package/new/shad
 
 #bypass
 svn export https://github.com/loso3000/other/trunk/up/pass ./package/pass
-rm ./package/pass/luci-app-bypass/po/zh_Hans && mv ./package/pass/luci-app-bypass/po/zh-cn ./package/pass/luci-app-bypass/po/zh_Hans
-rm ./package/pass/luci-app-ssr-plus/po/zh_Hans && mv ./package/pass/luci-app-ssr-plus/po/zh-cn ./package/pass/luci-app-ssr-plus/po/zh_Hans
+rm ./package/pass/luci-app-bypass/po/zh_Hans
+mv ./package/pass/luci-app-bypass/po/zh-cn ./package/pass/luci-app-bypass/po/zh_Hans
+rm ./package/pass/luci-app-ssr-plus/po/zh_Hans
+mv ./package/pass/luci-app-ssr-plus/po/zh-cn ./package/pass/luci-app-ssr-plus/po/zh_Hans
 # sed -i 's,default n,default y,g' package/luci-app-bypass/Makefile
-
 
 # 在 X86 架构下移除 Shadowsocks-rust
 sed -i '/Rust:/d' package/passwall/luci-app-passwall/Makefile
