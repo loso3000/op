@@ -618,5 +618,5 @@ EOF
 ./scripts/feeds update -i
 
 # cat  ./x86_64/x86_64 >> .config
-cat  ./x86_64/${CONFIG_S} >> .config
-#cat  ./x86_64/comm  >> .config
+cat  ./x86_64/${CONFIG_S} > .config
+cat  ./x86_64/comm  >> .config
