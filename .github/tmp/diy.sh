@@ -25,12 +25,20 @@ mv -rf  ./package/emortal2/automount   ./package/emortal/automount
 mv -rf  ./package/emortal2/autosamba   ./package/emortal/autosamba
 
 case "${CONFIG_S}" in
-Super|Mini|Vip-Mini|Vip-Mini)
+Plus)
+;;
+Bypass)
+;;
+Vip-Plus)
+;;
+Vip-Bypass)
+;;
+*)
 sed -i 's/nas/services/g' ./feeds/luci/applications/luci-app-zerotier/root/usr/share/luci/menu.d/luci-app-zerotier.json
-#samba4
 sed -i 's/nas/services/g' ./feeds/luci/applications/luci-app-samba4/root/usr/share/luci/menu.d/luci-app-samba4.json
 ;;
 esac
+
 
 case "${CONFIG_S}" in
 "Vip"-*)
@@ -81,7 +89,7 @@ echo "修改默认主题"
 # sed -i '/set luci.main.mediaurlbase=\/luci-static\/bootstrap/d' feeds/luci/themes/luci-theme-bootstrap/root/etc/uci-defaults/30_luci-theme-bootstrap
 
 rm -rf ./feeds/luci/themes/luci-theme-design
- git clone -b js https://github.com/gngpp/luci-theme-design.git  package/luci-theme-design
+git clone -b js https://github.com/gngpp/luci-theme-design.git  package/luci-theme-design
 #rm -rf ./feeds/luci/themes/luci-theme-argon
 sed -i 's,media .. \"\/b,resource .. \"\/b,g' ./feeds/luci/themes/luci-theme-argon/luasrc/view/themes/argon/sysauth.htm
 
