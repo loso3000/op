@@ -412,17 +412,21 @@ svn export https://github.com/vernesong/OpenClash/trunk/luci-app-openclash ./pac
 # svn export https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash package/new/luci-app-openclash
 # sed -i 's/+libcap /+libcap +libcap-bin /' package/new/luci-app-openclash/Makefile
 
-# rm -rf  ./feeds/luci/applications/luci-app-passwall
+rm -rf  ./feeds/luci/applications/luci-app-passwall
 rm -rf  ./feeds/luci/applications/luci-app-passwall2
 git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
-# git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
+git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
 
-# rm -rf ./feeds/packages/net/sing-box
 # git clone https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
-# rm -rf ./package/openwrt-passwall/trojan-plus
+rm -rf ./package/openwrt-passwall/trojan-plus
+sed -i 's,default n,default y,g' package/openwrt-passwall/luci-app-passwall/Makefile
+
+rm -rf ./feeds/packages/net/sing-box
+svn export https://github.com/xiaorouji/openwrt-passwall-packages/trunk/sing-box ./feeds/packages/net/sing-box
+svn export https://github.com/xiaorouji/openwrt-passwall-packages/trunk/sing-box package/new/sing-box
+
 rm -rf ./feeds/packages/net/trojan-plus
 svn export https://github.com/QiuSimons/OpenWrt-Add/trunk/trojan-plus package/new/trojan-plus
-
 svn export https://github.com/fw876/helloworld/trunk/shadow-tls package/new/shadow-tls
 # svn export https://github.com/fw876/helloworld/trunk/tuic-client package/new/tuic-client
 
@@ -433,20 +437,7 @@ rm ./package/pass/luci-app-bypass/po/zh_Hans
 mv ./package/pass/luci-app-bypass/po/zh-cn ./package/pass/luci-app-bypass/po/zh_Hans
 rm ./package/pass/luci-app-ssr-plus/po/zh_Hans
 mv ./package/pass/luci-app-ssr-plus/po/zh-cn ./package/pass/luci-app-ssr-plus/po/zh_Hans
-# sed -i 's,default n,default y,g' package/luci-app-bypass/Makefile
-
-# VSSR
-svn export https://github.com/jerrykuku/luci-app-vssr/trunk/  ./package/diy/luci-app-vssr
-pushd package/diy/luci-app-vssr
-sed -i 's,default n,default y,g' Makefile
-sed -i 's,+shadowsocks-libev-ss-local ,,g' Makefile
-popd
-# 在 X86 架构下移除 Shadowsocks-rust
-sed -i '/Rust:/d' package/passwall/luci-app-passwall/Makefile
-sed -i '/Rust:/d' package/diy/luci-app-vssr/Makefile
-sed -i '/Rust:/d' ./package/other/up/pass/luci-app-bypass/Makefile
-sed -i '/Rust:/d' ./package/other/up/pass/luci-ssr-plus/Makefile
-sed -i '/Rust:/d' ./package/other/up/pass/luci-ssr-plusdns/Makefile
+sed -i 's,default n,default y,g' package/pass/luci-app-bypass/Makefile
 
 sed -i 's/START=95/START=99/' `find package/ -follow -type f -path */ddns-scripts/files/ddns.init`
 
