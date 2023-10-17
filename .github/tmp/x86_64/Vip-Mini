@@ -406,7 +406,7 @@ CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_V2ray=y
 CONFIG_PACKAGE_luci-app-ssr-plus=y
 CONFIG_PACKAGE_luci-app-daed=y
 CONFIG_PACKAGE_luci-app-bypass=y
-CONFIG_PACKAGE_luci-app-vssr=y
+# CONFIG_PACKAGE_luci-app-vssr=y
 CONFIG_PACKAGE_luci-app-openclash=y
 ### APPS
 CONFIG_PACKAGE_luci-app-adguardhome=y
