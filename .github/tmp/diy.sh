@@ -417,9 +417,10 @@ rm -rf  ./feeds/luci/applications/luci-app-passwall2
 git clone https://github.com/xiaorouji/openwrt-passwall2.git package/passwall2
 git clone https://github.com/xiaorouji/openwrt-passwall package/passwall
 
-# git clone https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
+git clone https://github.com/xiaorouji/openwrt-passwall-packages package/openwrt-passwall
 rm -rf ./package/openwrt-passwall/trojan-plus
-sed -i 's,default n,default y,g' package/openwrt-passwall/luci-app-passwall/Makefile
+sed -i 's,default n,default y,g' package/passwall2/luci-app-passwall2/Makefile
+sed -i 's,default n,default y,g' package/passwall/luci-app-passwall/Makefile
 
 rm -rf ./feeds/packages/net/sing-box
 svn export https://github.com/xiaorouji/openwrt-passwall-packages/trunk/sing-box ./feeds/packages/net/sing-box
