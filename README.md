@@ -1,2 +1,2 @@
-# OnkeyOpenwrt
-OnkeyOpenwrt
+# Openwrt
+Openwrt
