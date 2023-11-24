@@ -61,6 +61,10 @@ rm -rf  ./feeds/luci/applications/luci-app-arpbind
 rm -rf  ./feeds/luci/applications/luci-app-netdata
 #rm -rf  ./feeds/packages/net/open-app-filter
 #rm -rf  ./feeds/packages/net/oaf
+
+rm -rf ./feeds/luci/luci-app-v2raya
+rm -rf ./feeds/luci/applications/luci-app-v2raya
+
 #rm -rf  ./feeds/luci/applications/luci-app-appfilter
 #rm -rf  ./package/wget 
 rm -rf  ./feeds/packages/net/wget
