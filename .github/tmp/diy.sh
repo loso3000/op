@@ -41,13 +41,15 @@ esac
 
 
 case "${CONFIG_S}" in
-"Vip"-*)
+"Vip"*)
 #修改默认IP地址
 sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
+CONFIG_Y="$CONFIG_S"
 ;;
 *)
 #修改默认IP地址
 sed -i 's/192.168.1.1/192.168.8.1/g' package/base-files/files/bin/config_generate
+CONFIG_Y="Ipv6-$CONFIG_S"
 ;;
 esac
 sed -i 's/services/status/g' ./feeds/luci/applications/luci-app-nlbwmon/root/usr/share/luci/menu.d/luci-app-nlbwmon.json
@@ -59,17 +61,15 @@ rm -rf  feeds/packages/net/wrtbwmon
 rm -rf  ./feeds/luci/applications/luci-app-wrtbwmon 
 rm -rf  ./feeds/luci/applications/luci-app-arpbind
 rm -rf  ./feeds/luci/applications/luci-app-netdata
-#rm -rf  ./feeds/packages/net/open-app-filter
-#rm -rf  ./feeds/packages/net/oaf
+rm -rf  ./feeds/packages/net/open-app-filter
+rm -rf  ./feeds/packages/net/oaf
 
-rm -rf ./feeds/luci/luci-app-v2raya
-rm -rf ./feeds/luci/applications/luci-app-v2raya
 
-#rm -rf  ./feeds/luci/applications/luci-app-appfilter
+rm -rf  ./feeds/luci/applications/luci-app-appfilter
 #rm -rf  ./package/wget 
 rm -rf  ./feeds/packages/net/wget
 mv -rf ./package/wget  ./feeds/packages/net/wget
-
+#aria2
 rm -rf ./feeds/packages/net/aria2
 rm -rf ./feeds/luci/applications/luci-app-aria2  package/feeds/packages/luci-app-aria2
 
@@ -110,8 +110,8 @@ sed -i "/timezone='.*'/a\\\t\t\set system.@system[-1].zonename='Asia/Shanghai'" 
 # rm -rf feeds/*/*/{luci-app-dockerman,luci-app-aria2,luci-app-beardropper,oaf,luci-app-adguardhome,luci-app-appfilter,open-app-filter,luci-app-openclash,luci-app-vssr,luci-app-ssr-plus,luci-app-passwall,luci-app-bypass,luci-app-wrtbwmon,luci-app-samba,luci-app-samba4,luci-app-unblockneteasemusic}
 
 #fserror
-sed -i 's/fs\/cifs/fs\/smb\/client/g'  ./package/kernel/linux/modules/fs.mk
-sed -i 's/fs\/smbfs_common/fs\/smb\/common/g'  ./package/kernel/linux/modules/fs.mk
+#sed -i 's/fs\/cifs/fs\/smb\/client/g'  ./package/kernel/linux/modules/fs.mk
+#sed -i 's/fs\/smbfs_common/fs\/smb\/common/g'  ./package/kernel/linux/modules/fs.mk
 
 # rm -rf ./package/network/utils/iproute2/
 # svn export https://github.com/openwrt/openwrt/trunk/package/network/utils/iproute2 ./package/network/utils/iproute2
@@ -119,6 +119,14 @@ sed -i 's/fs\/smbfs_common/fs\/smb\/common/g'  ./package/kernel/linux/modules/fs
 #  coremark
 sed -i '/echo/d' ./feeds/packages/utils/coremark/coremark
 
+git clone https://github.com/sirpdboy/luci-app-lucky ./package/lucky
+rm ./package/lucky/luci-app-lucky/po/zh_Hans
+mv ./package/lucky/luci-app-lucky/po/zh-cn ./package/ddns-go/luci-app-lucky/po/zh_Hans
+rm -rf ./feeds/packages/net/ddns-go
+rm -rf  ./feeds/luci/applications/luci-app-ddns-go
+git clone https://github.com/sirpdboy/luci-app-ddns-go ./package/ddns-go
+rm ./package/ddns-go/luci-app-ddns-go/po/zh_Hans
+mv ./package/ddns-go/luci-app-ddns-go/po/zh-cn ./package/ddns-go/luci-app-ddns-go/po/zh_Hans
 # nlbwmon
 #sed -i 's/524288/16777216/g' feeds/packages/net/nlbwmon/files/nlbwmon.config
 # 可以设置汉字名字
@@ -134,45 +142,21 @@ sed -i 's/1/0/g' ./package/diy1/linkease/linkease/files/linkease.config
 sed -i 's/luci-lib-ipkg/luci-base/g' package/diy1/istore/luci-app-store/Makefile
 # svn export https://github.com/linkease/istore-ui/trunk/app-store-ui package/app-store-ui
 
+#qbittorrent
+rm -rf packages/qbittorrent
+#rm -rf ./feeds/packages/net/qbittorrent
+#rm -rf ./feeds/packages/net/qBittorrent-Enhanced-Edition
+#rm -rf ./feeds/packages/net/qBittorrent-static
+#rm -rf ./feeds/luci/applications/luci-app-qbittorrent  package/feeds/packages/luci-app-qbittorrent
 rm -rf feeds/packages/net/v2ray-geodata
-rm -rf feeds/packages/net/mosdns
 git clone https://github.com/sbwml/luci-app-mosdns -b v5 package/mosdns
 git clone https://github.com/sbwml/v2ray-geodata package/v2ray-geodata
 git clone https://github.com/sbwml/v2ray-geodata feeds/packages/net/v2ray-geodata
-mv -f package/mosdns/mosdns feeds/packages/net/mosdns
+rm -rf ./feeds/packages/net/mosdns
 
-# alist 
-git clone https://github.com/sbwml/luci-app-alist package/alist
-sed -i 's/网络存储/存储/g' ./package/alist/luci-app-alist/po/zh-cn/alist.po
-# rm -rf feeds/packages/lang/golang
-# svn export https://github.com/sbwml/packages_lang_golang/branches/19.x feeds/packages/lang/golang
-# git clone https://github.com/sbwml/packages_lang_golang -b 20.x feeds/packages/lang/golang
+rm -rf feeds/packages/lang/golang
+git clone https://github.com/sbwml/packages_lang_golang -b 20.x feeds/packages/lang/golang
 
-git clone https://github.com/sirpdboy/luci-app-lucky ./package/lucky
-rm ./package/lucky/luci-app-lucky/po/zh_Hans
-mv ./package/lucky/luci-app-lucky/po/zh-cn ./package/ddns-go/luci-app-lucky/po/zh_Hans
-
-rm -rf ./feeds/packages/net/ddns-go
-rm -rf  ./feeds/luci/applications/luci-app-ddns-go
-git clone https://github.com/sirpdboy/luci-app-ddns-go ./package/ddns-go
-rm ./package/ddns-go/luci-app-ddns-go/po/zh_Hans
-mv ./package/ddns-go/luci-app-ddns-go/po/zh-cn ./package/ddns-go/luci-app-ddns-go/po/zh_Hans
-
-#cifs
-#sed -i 's/nas/services/g' ./feeds/luci/applications/luci-app-cifs-mount/luasrc/controller/cifs.lua   #dnsfilter
-
-#dnsmasq
-#rm -rf ./package/network/services/dnsmasq package/feeds/packages/dnsmasq
-#svn export https://github.com/immortalwrt/immortalwrt/branches/openwrt-18.06-k5.4/package/network/services/dnsmasq ./package/network/services/dnsmasq
-
-#upnp
-#rm -rf ./feeds/packages/net/miniupnpd
-#svn export https://github.com/sirpdboy/sirpdboy-package/trunk/upnpd/miniupnp   ./feeds/packages/net/miniupnp
-#rm -rf ./feeds/luci/applications/luci-app-upnp  package/feeds/packages/luci-app-upnp
-#svn export https://github.com/sirpdboy/sirpdboy-package/trunk/upnpd/luci-app-upnp ./feeds/luci/applications/luci-app-upnp
-
-#无链接
-# mv -f ./package/other/patch/index.htm ./package/lean/autocore/files/x86/index.htm
 
 #fix
 
@@ -406,15 +390,15 @@ sed -i "s/enabled '0'/enabled '1'/g" feeds/packages/utils/irqbalance/files/irqba
 # rm -rf feeds/packages/libs
 # svn export https://github.com/openwrt/packages/trunk/libs/libssh feeds/packages/libs/
 
-git clone https://github.com/yaof2/luci-app-ikoolproxy.git package/luci-app-ikoolproxy
-sed -i 's/, 1).d/, 11).d/g' ./package/luci-app-ikoolproxy/luasrc/controller/koolproxy.lua
+# git clone https://github.com/yaof2/luci-app-ikoolproxy.git package/luci-app-ikoolproxy
+# sed -i 's/, 1).d/, 11).d/g' ./package/luci-app-ikoolproxy/luasrc/controller/koolproxy.lua
 
 # Add OpenClash
 
 rm -rf  ./feeds/luci/applications/luci-app-openclash
 svn export https://github.com/vernesong/OpenClash/trunk/luci-app-openclash ./package/diy/luci-app-openclash
 # svn export https://github.com/vernesong/OpenClash/branches/dev/luci-app-openclash package/new/luci-app-openclash
-# sed -i 's/+libcap /+libcap +libcap-bin /' package/new/luci-app-openclash/Makefile
+sed -i 's/+libcap /+libcap +libcap-bin /' package/new/luci-app-openclash/Makefile
 
 
 rm -rf ./feeds/luci/applications/chinadns-ng package/feeds/packages/chinadns-ng
@@ -552,13 +536,10 @@ cp -f  ./patch/011-fix-mbo-modules-build.patch package/network/services/hostapd/
 find package/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/set luci.main.mediaurlbase/d' {} \;
 sed -i '/check_signature/d' ./package/system/opkg/Makefile   # 删除IPK安装签名
 
-# sed -i 's/kmod-usb-net-rtl8152/kmod-usb-net-rtl8152-vendor/' target/linux/rockchip/image/armv8.mk target/linux/sunxi/image/cortexa53.mk target/linux/sunxi/image/cortexa7.mk
 
 # sed -i 's/KERNEL_PATCHVER:=6.1/KERNEL_PATCHVER:=5.4/g' ./target/linux/*/Makefile
 # sed -i 's/KERNEL_PATCHVER:=5.15/KERNEL_PATCHVER:=5.4/g' ./target/linux/*/Makefile
 
-#zzz-default-settingsim
-# curl -fsSL  https://raw.githubusercontent.com/loso3000/other/master/patch/default-settings/zzz-default-settingsim > ./package/lean/default-settings/files/zzz-default-settings
 
 # 预处理下载相关文件，保证打包固件不用单独下载
 for sh_file in `ls ${GITHUB_WORKSPACE}/openwrt/common/*.sh`;do
@@ -574,7 +555,7 @@ VER1="$(grep "KERNEL_PATCHVER:="  ./target/linux/x86/Makefile | cut -d = -f 2)"
 ver54=`grep "LINUX_VERSION-5.4 ="  include/kernel-5.4 | cut -d . -f 3`
 ver515=`grep "LINUX_VERSION-5.15 ="  include/kernel-5.15 | cut -d . -f 3`
 ver61=`grep "LINUX_VERSION-6.1 ="  include/kernel-6.1 | cut -d . -f 3`
-date1="${CONFIG_S}-${DATA}_by_Sirpdboy"
+date1="${CONFIG_Y}-${DATA}_by_Sirpdboy"
 if [ "$VER1" = "5.4" ]; then
 date2="EzOpWrt ${CONFIG_S}-${DATA}-${VER1}.${ver54}_by_Sirpdboy"
 elif [ "$VER1" = "5.15" ]; then
@@ -645,7 +626,7 @@ md5_EzOpWrt=EzOpenWrt-${r_version}_${VER1}.${ver61}-x86-64-combined.img.gz
 md5_EzOpWrt_uefi=EzOpenWrt-${r_version}_${VER1}.${ver61}-x86-64-combined-efi.img.gz
 fi
 #md5
-cd bin/targets/x86/64
+cd bin/targets/*/*
 md5sum ${md5_EzOpWrt} > EzOpWrt_combined.md5  || true
 md5sum ${md5_EzOpWrt_uefi} > EzOpWrt_combined-efi.md5 || true
 exit 0
@@ -660,8 +641,6 @@ nowkmodfile=./files/etc/kmod.now
 mkdir -p $kmoddirdrv 2>/dev/null
 mkdir -p $kmoddirdocker 2>/dev/null
 cp -rf ./patch/list.txt $bakkmodfile
-mkdir -p files/etc/uci-defaults/
-cp -rf ./patch/init-settings.sh files/etc/uci-defaults/99-init-settings
 while IFS= read -r file; do
     a=`find ./bin/ -name "$file" `
     echo $a
@@ -699,7 +678,11 @@ run_docker() {
 opkg update
 opkg install $nowkmoddir/luci-app-dockerman*.ipk --force-depends
 opkg install $nowkmoddir/luci-i18n-dockerman*.ipk --force-depends
-
+	uci -q get dockerd.globals 2>/dev/null && {
+		uci -q set dockerd.globals.data_root='/opt/docker/'
+		uci -q set dockerd.globals.auto_start='1'
+		uci commit dockerd
+	}
 }
 case "$IPK" in
 	"drv")
