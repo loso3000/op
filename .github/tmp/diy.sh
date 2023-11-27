@@ -15,8 +15,9 @@ sed -i "s/ImmortalWrt/OpenWrt/" {package/base-files/files/bin/config_generate,in
 sed -i "s/ImmortalWrt/openwrt/" ./feeds/luci/modules/luci-mod-system/htdocs/luci-static/resources/view/system/flash.js  #改登陆域名
 #删除冲突插件
 # rm -rf $(find ./feeds/luci/ -type d -regex ".*\(argon\|design\|openclash\).*")
-rm -rf package/feeds/packages/prometheus-node-exporter-lua
-rm -rf feeds/packages/prometheus-node-exporter-lua
+rm -rf ./feeds/packages/prometheus-node-exporter-lua
+rm -rf ./feeds/packages/net/prometheus-node-exporter-lua
+rm -rf ./feeds/packages/net/adguardhome
 
 rm -rf $(find ./package/emortal/ -type d -regex ".*\(autocore\|automount\|autosamba\|default-settings\).*")
 mv -rf ./package/emortal2/autocore  ./package/emortal/autocore 
