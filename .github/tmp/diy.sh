@@ -408,7 +408,7 @@ rm -rf ./feeds/luci/applications/chinadns-ng package/feeds/packages/chinadns-ng
 
 # Passwall
 rm -rf ./feeds/packages/net/pdnsd-alt
-rm -rf ./feeds/packages/net/shadowsocks-libev
+# rm -rf ./feeds/packages/net/shadowsocks-libev
 rm -rf ./feeds/packages/net/xray-core
 rm -rf ./feeds/packages/net/kcptun
 rm -rf ./feeds/packages/net/brook
