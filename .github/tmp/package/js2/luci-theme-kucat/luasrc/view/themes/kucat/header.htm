@@ -58,13 +58,12 @@
 	local mode = 'light'
     local home = "overview" 
     local user = "admin" 
-    local ssr = "passwall" 
+    local showword = ""
+    local ssr = "" 
     local setbar = "1"
-	local advanced = "netwizard"
     local gohome = bar .. "status/"  ..home
     local gouser = bar .. "system/"  ..user
     local gossr = bar .. "services/"  ..ssr
-    local goadvanced = bar .. "system/"  ..advanced
 	local background = '0' 
 	local fontd = '1.2rem' 
 	local fontz = '0.92rem' 
@@ -87,11 +86,9 @@
 		primary_rgbs_ts = uci:get_first('advancedplus', 'basic', 'primary_rgbs_ts')
 		mode = uci:get_first('advancedplus', 'basic', 'mode')
 		setbar = uci:get_first('advancedplus', 'basic', 'setbar')
-		advanced = "advancedplus"
 		home =  uci:get_first('advancedplus', 'basic', 'gohome')
 		user = uci:get_first('advancedplus', 'basic', 'gouser')
 		ssr =  uci:get_first('advancedplus', 'basic', 'gossr')
-        goadvanced = bar .. "system/"  ..advanced
 		gohome = bar .. "status/" .. home
 		gouser = bar .. "system/" .. user
 		gossr = bar .. "services/" .. ssr
@@ -111,7 +108,7 @@
 	    bgqs_image = 'none !important'	
 		bgqs_color = 'rgba(var(--primary-rgbm),var(--primary-rgbm-ts))'
 	else
-	    bgqs_image = '-webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent) !important'
+	    bgqs_image = '-webkit-linear-gradient(45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent)'
 		bgqs_color = 'rgba(var(--primary-rgbm),var(--primary-rgbm-ts))'
 	end
  
@@ -175,7 +172,22 @@ io.popen("curl -kLfsm 3 -o /www/luci-static/kucat/img/down4.jpg  $(curl -kLfsm 5
         bg_url = media .. "/img/down4.jpg"
     end
 end
-
+function downIcibaword()
+    local check = 1
+    if fs.access('/tmp/kucaticibaword.tmp') then
+        local localtime = sys.exec("cat /tmp/kucaticibaword.tmp | grep `date +%Y%m%d`")
+        if localtime ~= '' then 
+			 check = 0 
+        end
+    end
+    if check == 1 or not fs.access('/www/luci-static/kucat/img/showword') then
+    io.popen("echo  $(curl -kLfsm 5 'https://zhouxiaoben.info/iciba/dsapi' | awk -F 'note\":\"' '{print $2}' | awk -F '\"' '{print $1}') >/www/luci-static/kucat/img/showword ")
+        sys.exec("date +%Y%m%d  > /tmp/kucaticibaword.tmp")
+    end
+    if fs.access('/www/luci-static/kucat/img/showword') then
+        showword = sys.exec("cat /www/luci-static/kucat/img/showword")
+    end
+end
 function downbirdUrl()
     local check = 1
     if fs.access('/tmp/kucatbird.tmp') then
@@ -234,6 +246,7 @@ elseif background == "4" then
 elseif background == "5" then
 		    pcall(downbirdUrl)
 end
+pcall(downIcibaword)
 if bklock == '1' then
 	bg_lock = bg_url
 else
@@ -260,14 +273,14 @@ else
 		    bg_lock = currentbk.url
 		end
 end
--%>
+%>
 <!DOCTYPE html>
 <html lang="<%=luci.i18n.context.lang%>">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0,viewport-fit=cover" />
     <link rel="manifest" href="<%=media%>/manifest.json">
-	<title>	<%=striptags( (boardinfo.hostname or "OpenWrt") .. ( (node and node.title) and ' - ' .. translate(node.title) or '')) %>	- LuCI</title>
+	<title>	<%=striptags( (boardinfo.hostname or "?") .. ( (node and node.title) and ' - ' .. translate(node.title) or '')) %>	- LuCI</title>
 	<meta name="format-detection" content="telephone=no, email=no" />
     <meta name="x5-fullscreen" content="true">
     <meta name="full-screen" content="yes">
@@ -329,7 +342,7 @@ end
 	<% end -%>
 	<% if setbar == "1" then %>
 	header.bar-primary .container-bar-left {
- 	   width: 400px;
+ 	   width: 300px;
  	   display: block;
 	}
 	header.bar-primary .container-bar-right {
@@ -364,11 +377,9 @@ end
 		<div id="header-bar-left" class="container-bar-left">
 			<a class="labelbar pdboy-closebar" href="javascript:void(0)" onclick="pdclosebar()" title="Close" ></a>
   			<a class="labelbar pdboy-gohome" href="<%=gohome%>" title="<%=home%>"></a>
-  		    <a class="labelbar pdboy-goadvanced" href="<%=goadvanced%>" title="<%=advanced%>"></a>
-  		    <a class="labelbar pdboy-gocontrol" href="<%=url("admin/control/parentcontrol")%>" title="<%:Parent Control%>"></a>
+  		    <a class="labelbar pdboy-goadvanced" href="<%=gouser%>" title="<%=user%>"></a>
   			<a class="labelbar pdboy-gossr" href="<%=gossr%>" title="<%=ssr%>"></a>
   		    <a class="labelbar pdboy-gonet" href="<%=url("admin/network/network")%>" title="<%:Network%>"></a>
-  		    <a class="labelbar pdboy-gouser" href="<%=gouser%>" title="<%=user%>"></a>
   		    <a class="labelbar pdboy-gopoweroff" href="<%=url("admin/system/reboot")%>" title="<%:Reboot%>"></a>
 		</div>
 		<div id="header-bar-right" class="container-bar-right">
@@ -392,6 +403,7 @@ end
 							<a class="showSide"  title="<%:Menu%>" ></a>
 							<a class="brand" href="#"><%=striptags(boardinfo.hostname or "OpenWrt")%></a>
 						</div>
+						<a class="showWord" href="https://www.github.com/sirpdboy/openwrt"><%=showword%></a>
 						<div class="status" id="indicators"></div>
 
                         <span > <a class="pdboy-qlogout" href="<%=url("admin/logout")%>" title="<%:Logout%>" > </a></span>
