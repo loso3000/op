@@ -173,7 +173,7 @@ git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/l
 # git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
 
 
-rm -rf ./package/ssr/luci-app-passwall2/htdocs/luci-static/resources/
+# rm -rf ./package/ssr/luci-app-passwall2/htdocs/luci-static/resources/
 # rm -rf ./package/ssr/luci-app-homeproxy
 #bypass
 rm -rf ./package/ssr/luci-app-ssr-plus
@@ -284,8 +284,8 @@ rm -rf ./package/other
 # rm -rf ./feeds/luci/collections/luci-lib-docker
 # git clone --depth=1 https://$github/lisaac/luci-lib-docker ./package/new/luci-lib-docker
 # git clone --depth=1 https://$github/lisaac/luci-app-dockerman ./package/new/dockerman
+# cat patch/dockerman.lua > ./feeds/luci/applications/luci-app-dockerman/luasrc/controller/dockerman.lua
 
-cat patch/dockerman.lua > ./feeds/luci/applications/luci-app-dockerman/luasrc/controller/dockerman.lua
 cat  patch/banner > ./package/base-files/files/etc/banner
 cat  patch/profile > ./package/base-files/files/etc/profile
 cat  patch/profiles > ./package/base-files/files/etc/profiles
@@ -594,11 +594,12 @@ nowkmodfile=./files/etc/kmod.now
 mkdir -p $kmoddirdrv 2>/dev/null
 mkdir -p $kmoddirdocker 2>/dev/null
 while IFS= read -r file; do
-    find ./bin/ -name "$file*.ipk" | xargs -i cp -f {}  $kmoddirdrv
-    a=`find ./bin/ -name "$file" `
+    find ./bin/ -name  $file | xargs -i cp -f {}  $kmoddirdrv
+    a=`find ./bin/ -name $file `
     echo $a
         cp -f $a $kmoddirdrv
 	echo $file >> $nowkmodfile
+ 
         if [ $? -eq 0 ]; then
             echo "cp ok: $file"
         else
@@ -631,6 +632,7 @@ for file in `ls $nowkmoddir/*.ipk`;do
 done
 echo "所有驱动已经安装完成！请重启系统生效！ "
 }
+
 run_docker() {
 if is_docker; then
 	echo " Docker服务已经存在！无须安装！"
@@ -650,7 +652,7 @@ else
    		echo "在线重新安装Docker及相关服务...请耐心等待...大约需要1-5分钟"
    		opkg install dockerd --force-depends >/dev/null 2>&1
     		opkg install luci-app-dockerman >/dev/null 2>&1
-    		opkg install luci-i18n-dockerman-zh-cn >/dev/null 2>&1
+    		opkg install luci-i18n-dockerman* >/dev/null 2>&1
     		if is_docker; then 
     		    echo "在线成功安装Docker及相关服务！" 
     		fi
