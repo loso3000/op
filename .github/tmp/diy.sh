@@ -203,7 +203,7 @@ rm -rf ./package/ssr/mosdns
 rm -rf ./package/ssr/trojan-plus
 rm -rf ./package/ssr/xray-core
 rm -rf ./package/ssr/xray-plugin
-rm -rf ./package/ssr/naiveproxy
+# rm -rf ./package/ssr/naiveproxy
 rm -rf ./package/ssr/v2ray-plugin
 rm -rf ./package/ssr/v2ray-core
 # rm -rf ./package/ssr/pdnsd
@@ -256,6 +256,7 @@ rm -rf ./feeds/luci/applications/luci-app-socat  ./package/feeds/luci/luci-app-s
 mv -f ./package/other/up/tool ./package/
 mv -f ./package/other/up/pass ./package/pass
 sed -i 's,default n,default y,g' ./package/pass/luci-app-bypass/Makefile
+rm -rf  ./package/pass/naiveproxy
 
 # kernel modules
 # rm -rf  ./feeds/packages/network/utils/iptables
