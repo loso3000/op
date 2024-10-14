@@ -254,9 +254,10 @@ rm -rf  ./feeds/luci/applications/luci-app-netdata
 mv -f ./package/other/up/netdata ./package/
 rm -rf ./feeds/luci/applications/luci-app-socat  ./package/feeds/luci/luci-app-socat
 mv -f ./package/other/up/tool ./package/
+rm -rf ./package/other/up/pass/naiveproxy
 mv -f ./package/other/up/pass ./package/pass
 sed -i 's,default n,default y,g' ./package/pass/luci-app-bypass/Makefile
-rm -rf  ./package/pass/naiveproxy
+rm -rf ./package/pass/naiveproxy
 
 # kernel modules
 # rm -rf  ./feeds/packages/network/utils/iptables
