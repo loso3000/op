@@ -595,13 +595,12 @@ bakkmodfile=./patch/kmod.source
 nowkmodfile=./files/etc/kmod.now
 mkdir -p $kmoddirdrv 2>/dev/null
 mkdir -p $kmoddirdocker 2>/dev/null
-while IFS= read -r file; do
+while IFS= read -r line; do  
+    cp -v $(find bin/ -type f -name "*${line}*") $kmoddirdrv
+    echo "$line"  
+done < "$bakkmodfile"
     # find ./bin/ -name  $file | xargs -i cp -f {}  $kmoddirdrv
     # cp -v $(find bin/targets/ -type f -name "*${FIRMWARE_TYPE}*") ../firmware
-    cp -v $(find bin/ -type f -name "*${file}*") $kmoddirdrv
-    a=`find bin/ -name $file `
-    echo "   ===cp file:" $a
-done < $bakkmodfile
 find ./bin/ -name "*dockerman*.ipk" | xargs -i cp -f {} $kmoddirdocker
 find ./bin/ -name "*dockerd*.ipk" | xargs -i cp -f {} $kmoddirdocker
 EOF
