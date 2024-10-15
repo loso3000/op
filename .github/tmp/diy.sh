@@ -591,13 +591,27 @@ cat>bakkmod.sh<<-\EOF
 #!/bin/bash
 kmoddirdrv=./files/etc/kmod.d/drv
 kmoddirdocker=./files/etc/kmod.d/docker
-bakkmodfile=./patch/kmod.source
+bakkmodfile=./kmod.source
+cp -rf ./patch/list.txt $bakkmodfile
 nowkmodfile=./files/etc/kmod.now
 mkdir -p $kmoddirdrv 2>/dev/null
 mkdir -p $kmoddirdocker 2>/dev/null
 while IFS= read -r line; do  
     cp -v $(find bin/ -type f -name "*${line}*") $kmoddirdrv
     echo "$line"  
+        a=`find ./bin/ -name "$line" `
+    echo $a
+    if [ -z "$a" ]; then
+        echo "no find: $line"
+    else
+        cp -f $a $kmoddirdrv
+	echo $line >> $nowkmodfile
+        if [ $? -eq 0 ]; then
+            echo "cp ok: $line"
+        else
+            echo "no cp:$line"
+        fi
+    fi
 done < "$bakkmodfile"
     # find ./bin/ -name  $file | xargs -i cp -f {}  $kmoddirdrv
     # cp -v $(find bin/targets/ -type f -name "*${FIRMWARE_TYPE}*") ../firmware
