@@ -120,7 +120,7 @@ setup_network()
 	  lannet=""
 	  for i in $(seq 1 $b) ; do [ "${wan_interface}" = "$(echo "$a" | sed -n ${i}p)" ] || lannet="${lannet} $(echo "$a" | sed -n ${i}p)" ;done
  	  [ "x$ifname" = "xdevice" ] &&  uci -q set network.@$ifname[0].ports="${lannet}"  || uci -q set network.lan.$ifname="${lannet}"
- 	  [ `uci -q get network.wan6` ] && uci -q set network.wan6.$ifname="@wan"
+ 	 # [ `uci -q get network.wan6` ] && uci -q set network.wan6.$ifname="@wan"
      }
 }
 
