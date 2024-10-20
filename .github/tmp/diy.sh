@@ -654,6 +654,7 @@ else
 	opkg install $nowkmoddir/dockerd*.ipk --force-depends >/dev/null 2>&1
 	opkg install $nowkmoddir/luci-app-dockerman*.ipk --force-depends  >/dev/null 2>&1
 	opkg install $nowkmoddir/luci-i18n-dockerman*.ipk --force-depends  >/dev/null 2>&1
+    	opkg install avahi-daemon >/dev/null 2>&1
 	if is_docker; then
 		echo "本地成功安装Docker及相关服务！"
 	else
@@ -662,6 +663,7 @@ else
    		opkg install dockerd --force-depends >/dev/null 2>&1
     		opkg install luci-app-dockerman >/dev/null 2>&1
     		opkg install luci-i18n-dockerman* >/dev/null 2>&1
+    		opkg install avahi-daemon >/dev/null 2>&1
     		if is_docker; then 
     		    echo "在线成功安装Docker及相关服务！" 
     		fi
