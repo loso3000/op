@@ -10,11 +10,13 @@ CONFIG_TARGET_ROOTFS_PARTSIZE=1925
 # CONFIG_VMDK_IMAGES is not set
 # CONFIG_SIGNATURE_CHECK is not set
 # CONFIG_SIGNED_PACKAGES is not set
-CONFIG_GRUB_IMAGES=y
+# CONFIG_GRUB_IMAGES is not set
 CONFIG_GRUB_EFI_IMAGES=y
 
 CONFIG_GRUB_TIMEOUT="0"
-CONFIG_GRUB_TITLE="EzOpWrt"
+CONFIG_GRUB_TITLE="EzOpWrt Built By Sirpdboy"
+
+
 CONFIG_PACKAGE_libatomic=y
 CONFIG_PACKAGE_resolveip=y
 CONFIG_PACKAGE_kmod-nvme=y
@@ -33,10 +35,10 @@ CONFIG_PACKAGE_kmod-fs-nfs-common=y
 CONFIG_PACKAGE_kmod-fs-nfs-v3=y
 CONFIG_PACKAGE_kmod-fs-nfs-v4=y
 CONFIG_PACKAGE_kmod-fs-squashfs=y
-CONFIG_PACKAGE_kmod-fuse=y
+# CONFIG_PACKAGE_kmod-fuse=y
 CONFIG_PACKAGE_kmod-iavf=y
-CONFIG_PACKAGE_kmod-ice=y
-CONFIG_PACKAGE_kmod-ifb=y
+# CONFIG_PACKAGE_kmod-ice=y
+# CONFIG_PACKAGE_kmod-ifb=y
 CONFIG_PACKAGE_kmod-igb=y
 CONFIG_PACKAGE_kmod-igb-vendor=y
 CONFIG_PACKAGE_kmod-ixgbe=y
@@ -71,38 +73,38 @@ CONFIG_PACKAGE_kmod-usb2=y
 CONFIG_PACKAGE_kmod-usb2-pci=y
 CONFIG_PACKAGE_kmod-usb3=y
 CONFIG_PACKAGE_kmod-usbip=y
-CONFIG_PACKAGE_kmod-ath=y
-CONFIG_PACKAGE_libimobiledevice=y
-CONFIG_PACKAGE_libplist=y
-CONFIG_PACKAGE_libusbmuxd=y
-CONFIG_PACKAGE_bind-libs=y
-CONFIG_PACKAGE_libcap=y
-CONFIG_PACKAGE_libcurl=y
+# CONFIG_PACKAGE_kmod-ath=y
+# CONFIG_PACKAGE_libimobiledevice=y
+# CONFIG_PACKAGE_libplist=y
+# CONFIG_PACKAGE_libusbmuxd=y
+# CONFIG_PACKAGE_bind-libs=y
+# CONFIG_PACKAGE_libcap=y
+# CONFIG_PACKAGE_libcurl=y
 #
 # Miscellaneous
 #
-CONFIG_LIBCURL_PROXY=y
-CONFIG_LIBCURL_CRYPTO_AUTH=y
-CONFIG_LIBCURL_TLS_SRP=y
-CONFIG_LIBCURL_THREADED_RESOLVER=y
-CONFIG_LIBCURL_UNIX_SOCKETS=y
-CONFIG_PACKAGE_libevdev=y
-CONFIG_PACKAGE_libmount=y
-CONFIG_PACKAGE_libnetsnmp=y
-CONFIG_PACKAGE_libnghttp2=y
-CONFIG_PACKAGE_libpci=y
-CONFIG_PACKAGE_libreadline=y
-CONFIG_PACKAGE_libudev-zero=y
-CONFIG_PACKAGE_libusb-1.0=y
-CONFIG_PACKAGE_libuv=y
-CONFIG_PACKAGE_libxml2=y
+# CONFIG_LIBCURL_PROXY=y
+# CONFIG_LIBCURL_CRYPTO_AUTH=y
+# CONFIG_LIBCURL_TLS_SRP=y
+# CONFIG_LIBCURL_THREADED_RESOLVER=y
+# CONFIG_LIBCURL_UNIX_SOCKETS=y
+# CONFIG_PACKAGE_libevdev=y
+# CONFIG_PACKAGE_libmount=y
+# CONFIG_PACKAGE_libnetsnmp=y
+# CONFIG_PACKAGE_libnghttp2=y
+# CONFIG_PACKAGE_libpci=y
+# CONFIG_PACKAGE_libreadline=y
+# CONFIG_PACKAGE_libudev-zero=y
+# CONFIG_PACKAGE_libusb-1.0=y
+# CONFIG_PACKAGE_libuv=y
+# CONFIG_PACKAGE_libxml2=y
 CONFIG_PACKAGE_curl=y
 # CONFIG_PACKAGE_miniupnpd=y  #error log
-CONFIG_PACKAGE_tc-tiny=y
+# CONFIG_PACKAGE_tc-tiny=y
 
-CONFIG_PACKAGE_ppp-mod-pppol2tp=y
-CONFIG_PACKAGE_ppp-mod-pptp=y
-CONFIG_PACKAGE_xl2tpd=y
+# CONFIG_PACKAGE_ppp-mod-pppol2tp=y
+# CONFIG_PACKAGE_ppp-mod-pptp=y
+# CONFIG_PACKAGE_xl2tpd=y
 
 #CONFIG_PACKAGE_ds-lite=y #dslite vpn gw
 #ds-lite
@@ -147,7 +149,25 @@ CONFIG_PACKAGE_hostapd=y
 CONFIG_DRIVER_WEXT_SUPPORT=y
 CONFIG_DRIVER_11N_SUPPORT=y
 CONFIG_DRIVER_11AC_SUPPORT=y
+CONFIG_PACKAGE_kmod-ipt-tproxy=y
+# CONFIG_PACKAGE_kmod-ixgbe is not set
+# CONFIG_PACKAGE_kmod-ixgbevf is not set
+CONFIG_PACKAGE_lua-neturl=y
+#ppp
+# CONFIG_PACKAGE_ppp=y
+# CONFIG_PACKAGE_kmod-mppe=y
+# CONFIG_PACKAGE_kmod-ppp-synctty is not set
+# CONFIG_PACKAGE_kmod-pppoe=y
+# CONFIG_PACKAGE_kmod-pppox=y
+# CONFIG_PACKAGE_ppp-mod-passwordfd is not set
+# CONFIG_PACKAGE_ppp-mod-pppoa is not set
+# CONFIG_PACKAGE_ppp-mod-pppoe=y
+# CONFIG_PACKAGE_miniupnpd=y  #error log
+# CONFIG_PACKAGE_tc-tiny=y
 
+CONFIG_PACKAGE_luci-proto-ipv6=y
+# CONFIG_PACKAGE_luci-proto-openconnect is not set
+CONFIG_PACKAGE_luci-proto-ppp=y
 ### USB Audio 
 CONFIG_PACKAGE_kmod-usb-audio=y
 #Tailscale
@@ -162,7 +182,9 @@ CONFIG_PACKAGE_default-settings=y
 CONFIG_PACKAGE_default-settings-chn=y
 CONFIG_PACKAGE_automount=y
 CONFIG_PACKAGE_autosamba=y
-
+CONFIG_PACKAGE_luci=y
+CONFIG_PACKAGE_luci-lib-ipkg=y
+CONFIG_PACKAGE_luci-app-opkg=y
 # CONFIG_PACKAGE_luci-proto-wireguard=y
 CONFIG_PACKAGE_luci-theme-bootstrap=y
 CONFIG_PACKAGE_luci-theme-kucat=y
@@ -181,13 +203,15 @@ CONFIG_PACKAGE_luci-app-netwizard=y
 CONFIG_PACKAGE_luci-app-autotimeset=y
 # CONFIG_PACKAGE_luci-app-bypass=y
 
-# CONFIG_PACKAGE_luci-app-fileassistant=y
+CONFIG_PACKAGE_luci-app-fileassistant=y
 CONFIG_PACKAGE_luci-app-nft-qos=y
+
 ### ImmortalWrt Proxy - nft
 # CONFIG_PACKAGE_luci-app-homeproxy=y
 CONFIG_PACKAGE_luci-app-mihomo=y
-CONFIG_PACKAGE_haproxy=y
+# CONFIG_PACKAGE_haproxy=y
 CONFIG_PACKAGE_mihomo=y
+CONFIG_PACKAGE_luci-app-firewall=y
 CONFIG_PACKAGE_firewall4=y
 CONFIG_PACKAGE_yq=y
 CONFIG_PACKAGE_ca-bundle=y
@@ -199,7 +223,7 @@ CONFIG_PACKAGE_curl=y
 
 CONFIG_PACKAGE_luci-app-wrtbwmon=y
 CONFIG_PACKAGE_luci-app-partexp=y
-# CONFIG_PACKAGE_luci-app-store=y
+CONFIG_PACKAGE_luci-app-store=n
 CONFIG_PACKAGE_luci-app-netspeedtest=y
 # CONFIG_PACKAGE_luci-app-control-parentcontrol=y
 # CONFIG_PACKAGE_luci-app-parentcontrol=y
@@ -227,13 +251,13 @@ CONFIG_PACKAGE_luci-app-mosdns=y
 # CONFIG_PACKAGE_luci-app-nlbwmon=y
 # CONFIG_PACKAGE_luci-app-qbittorrent=y
 # CONFIG_PACKAGE_luci-app-ramfree=y
-# CONFIG_PACKAGE_luci-app-samba4=y
+# CONFIG_PACKAGE_luci-app-samba4 is not set
 CONFIG_PACKAGE_luci-app-socat=y
 # CONFIG_PACKAGE_luci-app-sqm=y
 CONFIG_PACKAGE_luci-app-ttyd=y
 # CONFIG_PACKAGE_luci-app-upnp=y
 # CONFIG_PACKAGE_luci-app-usb-printer=y
-# CONFIG_PACKAGE_luci-app-vlmcsd=y
+# CONFIG_PACKAGE_luci-app-vlmcsd is not set
 # CONFIG_PACKAGE_luci-app-watchcat=y
 # CONFIG_PACKAGE_luci-app-wireguard=y
 CONFIG_PACKAGE_luci-app-wolplus=y
@@ -276,7 +300,7 @@ CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_ShadowsocksR_Libev_Client=y
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Hysteria is not set
 # CONFIG_PACKAGE_luci-app-ssr-plus_INCLUDE_Trojan is not set
 
-CONFIG_PACKAGE_curl=y
+
 CONFIG_PACKAGE_bind-host=y
 
 CONFIG_PACKAGE_ddns-scripts=y
@@ -341,3 +365,141 @@ CONFIG_PACKAGE_kmod-usbip=y
 CONFIG_PACKAGE_kmod-usb-ohci=y
 CONFIG_PACKAGE_kmod-usb-ohci-pci=y
 #docke
+CONFIG_PACKAGE_luci-app-dockerman=m
+CONFIG_KERNEL_CGROUP_FREEZER=y
+CONFIG_KERNEL_CGROUP_DEVICE=y
+CONFIG_KERNEL_NET_CLS_CGROUP=y
+CONFIG_KERNEL_CGROUP_NET_PRIO=y
+CONFIG_KERNEL_FS_POSIX_ACL=y
+CONFIG_KERNEL_EXT4_FS_POSIX_ACL=y
+CONFIG_KERNEL_EXT4_FS_SECURITY=y
+CONFIG_PACKAGE_ca-certificates=y
+CONFIG_PACKAGE_kmod-dax=y
+CONFIG_PACKAGE_kmod-dm=y
+CONFIG_PACKAGE_kmod-crypto-acompress=y
+CONFIG_PACKAGE_kmod-fs-btrfs=y
+CONFIG_PACKAGE_kmod-lib-crc32c=y
+CONFIG_PACKAGE_kmod-lib-lzo=y
+CONFIG_PACKAGE_kmod-lib-raid6=y
+CONFIG_PACKAGE_kmod-lib-xor=y
+CONFIG_PACKAGE_kmod-lib-zlib-deflate=y
+CONFIG_PACKAGE_kmod-lib-zlib-inflate=y
+CONFIG_PACKAGE_kmod-lib-zstd=y
+ CONFIG_PACKAGE_kmod-br-netfilter=y
+ CONFIG_PACKAGE_kmod-nf-ipvs=y
+ CONFIG_PACKAGE_kmod-dummy=y
+CONFIG_PACKAGE_kmod-veth=y
+CONFIG_PACKAGE_kmod-ikconfig=y
+CONFIG_PACKAGE_libattr=y
+CONFIG_PACKAGE_libdevmapper=y
+CONFIG_PACKAGE_liblzo=y
+CONFIG_PACKAGE_libmount=y
+CONFIG_PACKAGE_libseccomp=y
+CONFIG_PACKAGE_libuv=y
+CONFIG_PACKAGE_libwebsockets-full=y
+CONFIG_PACKAGE_luci-lib-docker=y
+CONFIG_PACKAGE_btrfs-progs=y
+CONFIG_PACKAGE_ttyd=y
+CONFIG_PACKAGE_cgroupfs-mount=y
+CONFIG_PACKAGE_containerd=y
+CONFIG_PACKAGE_dockerd=y
+CONFIG_DOCKER_CGROUP_OPTIONS=y
+CONFIG_DOCKER_NET_MACVLAN=y
+CONFIG_DOCKER_STO_EXT4=y
+CONFIG_PACKAGE_libnetwork=y
+CONFIG_PACKAGE_mount-utils=y
+CONFIG_PACKAGE_runc=y
+CONFIG_PACKAGE_tini=y
+CONFIG_PACKAGE_libuv=y
+CONFIG_PACKAGE_libwebsockets-full=y
+CONFIG_PACKAGE_luci-lib-docker=y
+CONFIG_PACKAGE_libnl-tiny=y
+CONFIG_PACKAGE_libnl-tiny1=y
+CONFIG_PACKAGE_libnl-tiny2022-05-17=y
+
+### Kernel driver
+# CONFIG_PACKAGE_kmod-igb=y
+CONFIG_PACKAGE_kmod-igc=y
+CONFIG_PACKAGE_kmod-mt76x2=y
+CONFIG_PACKAGE_kmod-ngbe=y
+CONFIG_PACKAGE_kmod-r8101=y
+# CONFIG_PACKAGE_kmod-r8126=y
+CONFIG_PACKAGE_kmod-r8168=y
+CONFIG_PACKAGE_kmod-txgbe=y
+# CONFIG_PACKAGE_kmod-r8169 is not set
+CONFIG_PACKAGE_kmod-nvme=y
+
+### Display & Extra Drivers
+CONFIG_PACKAGE_kmod-backlight-pwm=y
+CONFIG_PACKAGE_kmod-backlight=y
+CONFIG_PACKAGE_kmod-drm-amdgpu=y
+CONFIG_PACKAGE_kmod-drm-kms-helper=y
+CONFIG_PACKAGE_kmod-drm-radeon=y
+CONFIG_PACKAGE_kmod-drm-ttm=y
+CONFIG_PACKAGE_kmod-drm=y
+CONFIG_PACKAGE_kmod-fb-cfb-copyarea=y
+CONFIG_PACKAGE_kmod-fb-cfb-fillrect=y
+CONFIG_PACKAGE_kmod-fb-cfb-imgblt=y
+CONFIG_PACKAGE_kmod-fb-sys-fops=y
+CONFIG_PACKAGE_kmod-fb-sys-ram=y
+CONFIG_PACKAGE_kmod-fb=y
+CONFIG_PACKAGE_kmod-sound-hda-codec-realtek=y
+CONFIG_PACKAGE_kmod-sound-hda-intel=y
+CONFIG_PACKAGE_kmod-video-pwc=y
+CONFIG_PACKAGE_kmod-video-uvc=y
+CONFIG_PACKAGE_kmod-video-videobuf2=y
+
+#WIFI驱动
+CONFIG_PACKAGE_kmod-mt7915e=y
+CONFIG_PACKAGE_kmod-mt7921e=y
+CONFIG_PACKAGE_kmod-mt7921-common=y
+CONFIG_PACKAGE_kmod-mt792x-common=y
+CONFIG_PACKAGE_kmod-mt7915-firmware=y
+CONFIG_PACKAGE_kmod-mt7916-firmware=y
+CONFIG_PACKAGE_kmod-mt7921-firmware=y
+CONFIG_PACKAGE_kmod-mt7922-firmware=y
+CONFIG_PACKAGE_kmod-mt792x-firmware=y
+#内核调整
+CONFIG_PACKAGE_kmod-fuse=y
+CONFIG_PACKAGE_kmod-tun=y
+CONFIG_PACKAGE_kmod-wireguard=y
+CONFIG_PACKAGE_kmod-mtd-rw=y
+CONFIG_PACKAGE_kmod-usb2=y
+CONFIG_PACKAGE_kmod-usb3=y
+CONFIG_PACKAGE_kmod-usb-core=y
+CONFIG_PACKAGE_kmod-usb-ehci=y
+CONFIG_PACKAGE_kmod-usb-ohci=y
+CONFIG_PACKAGE_kmod-usb-uhci=y
+CONFIG_PACKAGE_kmod-usb-net=y
+CONFIG_PACKAGE_kmod-usb-net-cdc-eem=y
+CONFIG_PACKAGE_kmod-usb-net-cdc-ether=y
+CONFIG_PACKAGE_kmod-usb-net-cdc-mbim=y
+CONFIG_PACKAGE_kmod-usb-net-cdc-ncm=y
+CONFIG_PACKAGE_kmod-usb-net-cdc-subset=y
+CONFIG_PACKAGE_kmod-usb-net-huawei-cdc-ncm=y
+CONFIG_PACKAGE_kmod-usb-net-ipheth=y
+CONFIG_PACKAGE_kmod-usb-net-qmi-wwan=y
+CONFIG_PACKAGE_kmod-usb-net-qmi-wwan-fibocom=y
+CONFIG_PACKAGE_kmod-usb-net-qmi-wwan-quectel=y
+CONFIG_PACKAGE_kmod-usb-net-rndis=y
+CONFIG_PACKAGE_kmod-usb-net-rtl8150=y
+CONFIG_PACKAGE_kmod-usb-net-rtl8152=y
+CONFIG_PACKAGE_kmod-usb-storage=y
+CONFIG_PACKAGE_kmod-usb-storage-extras=y
+CONFIG_PACKAGE_kmod-usb-storage-uas=y
+CONFIG_PACKAGE_kmod-nft-socket=y
+#组件调整
+CONFIG_PACKAGE_cpufreq=y
+CONFIG_PACKAGE_ip-full=y
+CONFIG_PACKAGE_ip6tables=y
+CONFIG_PACKAGE_ip6tables-extra=y
+CONFIG_PACKAGE_ip6tables-mod-nat=y
+CONFIG_PACKAGE_luci-base=y
+CONFIG_PACKAGE_luci-compat=y
+CONFIG_PACKAGE_luci-lib-base=y
+CONFIG_PACKAGE_luci-lib-ipkg=y
+CONFIG_PACKAGE_luci-lua-runtime=y
+CONFIG_PACKAGE_wpad-openssl=y
+
+# CONFIG_PACKAGE_dnsmasq-full=y
+# CONFIG_PACKAGE_dnsmasq 
