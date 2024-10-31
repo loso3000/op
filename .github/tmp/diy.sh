@@ -268,6 +268,12 @@ rm -rf ./feeds/packages/net/lua-neturl
 rm -rf ./feeds/packages/net/redsocks2
 rm -rf ./feeds/packages/net/shadow-tls
 
+rm -rf ./package/other/up/tool/autocore
+rm -rf ./package/other/up/tool/default-settings
+rm -rf ./package/other/up/tool/autosamba
+rm -rf ./package/other/up/tool/automount
+rm -rf ./package/other/up/tool/luci-theme-kucat
+
 rm -rf  ./feeds/luci/applications/luci-app-netdata
 mv -f ./package/other/up/netdata ./package/
 rm -rf ./feeds/luci/applications/luci-app-socat  ./package/feeds/luci/luci-app-socat
