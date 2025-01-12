@@ -24,20 +24,69 @@ case "${CONFIG_S}" in
      *) return 1 ;;
 esac
 }
+CFG_FILE="./package/base-files/files/bin/config_generate"
 config_generate=package/base-files/files/bin/config_generate
 [ ! -d files/root ] || mkdir -p files/root
 
 [[ -n $CONFIG_S ]] || CONFIG_S=Super
+rm -rf ./feeds/luci/themes/luci-app-filter
+rm -rf ./feeds/luci/themes/luci-app-oaf
+rm -rf ./feeds/luci/themes/luci-theme-argon
+rm -rf ./feeds/packages/net/mentohust
+rm -rf ./feeds/packages/net/open-app-filter
+rm -rf  ./feeds/luci/applications/luci-app-arpbind
+rm -rf  ./feeds/packages/net/oaf
+#rm -rf  ./feeds/packages/net/wget
 
-sed -i "s/ImmortalWrt/OpenWrt/" {package/base-files/files/bin/config_generate,include/version.mk}
-sed -i "s/ImmortalWrt/openwrt/" ./feeds/luci/modules/luci-mod-system/htdocs/luci-static/resources/view/system/flash.js  #改登陆域名
+rm -rf  ./feeds/packages/net/zsh
+rm -rf  ./feeds/packages/net/homebox
+rm -rf  ./feeds/packages/net/naiveproxy
+sed -i "s/ImmortalWrt/EzopWrt/" {package/base-files/files/bin/config_generate,include/version.mk}
+sed -i "s/iStoreOS/EzopWrt/" {package/base-files/files/bin/config_generate,include/version.mk}
+sed -i "s/ImmortalWrt/EzopWrt/" ./feeds/luci/modules/luci-mod-system/htdocs/luci-static/resources/view/system/flash.js  #改登陆域名
 #删除冲突插件
 # rm -rf $(find ./feeds/luci/ -type d -regex ".*\(argon\|design\|openclash\).*")
 # rm -rf package/feeds/packages/prometheus-node-exporter-lua
 # rm -rf feeds/packages/prometheus-node-exporter-lua
 #samrtdns
 rm -rf ./feeds/luci/applications/luci-app-smartdns
+rm -rf ./feeds/luci/applications/luci-app-lucky
+rm -rf ./feeds/luci/applications/luci-app-ddns-go
+rm -rf ./feeds/luci/applications/luci-app-filetransfer
+rm -rf ./feeds/luci/applications/luci-app-fileassistant
+rm -rf ./feeds/luci/applications/luci-app-msd_lite
+rm -rf ./feeds/luci/applications/luci-app-smartdns
+rm -rf ./feeds/luci/applications/luci-app-wolplus
+rm -rf ./feeds/luci/applications/luci-app-wrtbwmon
+rm -rf ./feeds/luci/applications/luci-app-udpxy
+rm -rf ./feeds/luci/applications/luci-app-adguardhome
+rm -rf ./feeds/luci/applications/luci-app-mosdns
+rm -rf ./feeds/luci/applications/luci-app-passwall
+rm -rf ./feeds/luci/applications/luci-app-passwall2
+rm -rf  ./feeds/packages/net/wrtbwmon
 rm -rf  ./feeds/packages/net/smartdns
+rm -rf  ./feeds/packages/net/lucky
+rm -rf  ./feeds/packages/net/ddns-go
+#istore
+rm -rf  ./feeds/jjm2473_apps/homebox
+rm -rf  ./feeds/jjm2473_apps/luci-app-homebox
+rm -rf  ./feeds/third_party/luci-app-LingTiGameAcc
+rm -rf  ./feeds/third_party/luci-app-arpbind
+rm -rf  ./feeds/third_party/luci-app-fileassistant
+rm -rf  ./feeds/third_party/luci-app-smartdns
+rm -rf  ./feeds/third_party/luci-app-socat
+rm -rf  ./feeds/third_party/smartdns
+rm -rf  ./feeds/third_party/luci-app-netdata
+rm -rf  ./feeds/third_party/luci-app-autotimeset
+rm -rf ./feeds/openwrt-third/luci-app-netdata
+rm -rf ./feeds/openwrt-third/smartdns
+rm -rf ./feeds/openwrt-third/luci-app-autotimeset
+rm -rf ./feeds/luci/applications/luci-app-autotimeset
+rm -rf ./feeds/third/luci-app-autotimeset
+rm -rf  ./feeds/packages/ariang
+rm -rf  ./feeds/packages/webui-aria2
+#error
+rm -rf  ./target/linux/ath79
 
 export github=github.com
 export mirror=raw.githubusercontent.com/coolsnowwolf/lede/master
@@ -170,6 +219,8 @@ rm -rf  ./feeds/luci/applications/luci-app-control-speedlimit
 rm -rf ./feeds/packages/net/aria2
 rm -rf ./feeds/luci/applications/luci-app-aria2  package/feeds/packages/luci-app-aria2
 
+rm -rf $(find ./package/ -type d -regex ".*\(luci-app-autotimeset\luci-app-autotimeset).*")
+rm -rf $(find ./feeds/ -type d -regex ".*\(luci-app-autotimeset\luci-app-autotimeset).*")
 
 # Passwall
 
@@ -189,6 +240,10 @@ rm -rf feeds/packages/lang/golang
 git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
 # git clone https://github.com/sbwml/packages_lang_golang -b 21.x feeds/packages/lang/golang
 # git clone https://github.com/sbwml/packages_lang_golang -b 22.x feeds/packages/lang/golang
+# rm -rf ./package/other/luci-app-mwan3 ./package/other/mwan3
+# rm -rf ./feeds/luci/applications/luci-app-mwan3
+rm -rf ./feeds/packages/net/mwan3
+mv ./package/other/up/tool/mwan3 ./feeds/packages/net/mwan3
 
 
 # rm -rf ./package/ssr/luci-app-passwall2/htdocs/luci-static/resources/
@@ -229,7 +284,8 @@ rm -rf ./package/ssr/lua-neturl
 rm -rf ./package/ssr/redsocks2
 rm -rf ./package/ssr/shadow-tls
 
-
+#istoreos-files
+rm -rf ./package/istoreos-files
 
  rm -rf ./feeds/packages/net/brook
  rm -rf ./feeds/packages/net/chinadns-ng
@@ -268,20 +324,10 @@ rm -rf ./feeds/packages/net/lua-neturl
 rm -rf ./feeds/packages/net/redsocks2
 rm -rf ./feeds/packages/net/shadow-tls
 
-rm -rf ./package/other/up/tool/autocore
-rm -rf ./package/other/up/tool/default-settings
-rm -rf ./package/other/up/tool/autosamba
-rm -rf ./package/other/up/tool/automount
-rm -rf ./package/other/up/tool/luci-theme-kucat
-
-rm -rf  ./feeds/luci/applications/luci-app-netdata
-mv -f ./package/other/up/netdata ./package/
 rm -rf ./feeds/luci/applications/luci-app-socat  ./package/feeds/luci/luci-app-socat
-mv -f ./package/other/up/tool ./package/
 rm -rf ./package/other/up/pass/naiveproxy
-mv -f ./package/other/up/pass ./package/pass
 sed -i 's,default n,default y,g' ./package/pass/luci-app-bypass/Makefile
-rm -rf ./package/pass/naiveproxy
+rm -rf ./package/other/up/pass/naiveproxy
 
 # kernel modules
 # rm -rf  ./feeds/packages/network/utils/iptables
@@ -303,7 +349,6 @@ rm -rf  ./package/kucat/iptables
 #rm -rf  ./package/kernel/bpf-headers
 #rm -rf  ./feeds/luci/applications/luci-app-daed
 
-rm -rf ./package/other
 
 # Add luci-app-dockerman
 # rm -rf ./feeds/luci/applications/luci-app-dockerman
@@ -319,7 +364,8 @@ cat  patch/sysctl.conf > ./package/base-files/files/etc/sysctl.conf
 
 mkdir -p files/usr/share
 mkdir -p files/etc/root
-# rm -rf $(find ./package/emortal/ -type d -regex ".*\(autocore\|automount\|autosamba\|default-settings\).*")
+mkdir -p ./package/emortal
+# rm -rf $(find ./package/ -type d -regex ".*\(autocore\|automount\|autosamba\|default-settings\).*")
 rm -rf ./package/emortal/autocore ./package/emortal/automount  ./package/emortal/autosamba  ./package/emortal/default-settings 
 mv -rf ./package/emortal2/autocore  ./package/emortal/autocore 
 mv -rf  ./package/emortal2/default-settings   ./package/emortal/default-settings 
@@ -643,14 +689,15 @@ find ./bin/ -name "*dockerman*.ipk" | xargs -i cp -f {} $kmoddirdocker
 find ./bin/ -name "*dockerd*.ipk" | xargs -i cp -f {} $kmoddirdocker
 EOF
 
-if  is_vip ; then
+case "${CONFIG_S}" in
+     "Vip"*)  
 #修改默认IP地址
  sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
 
 #修改immortalwrt.lan关联IP
-sed -i "s/192\.168\.[0-9]*\.[0-9]*/192.168.10.1/g" $(find ./feeds/luci/modules/luci-mod-system/ -type f -name "flash.js")
+sed -i "s/192\.168\.[0-9]*\.[0-9]*/192\.168\.10\.1/g" $(find ./feeds/luci/modules/luci-mod-system/ -type f -name "flash.js")
 #修改默认IP地址
-sed -i "s/192\.168\.[0-9]*\.[0-9]*/192.168.10.1/g"  package/base-files/files/bin/config_generate
+# sed -i "s/192\.168\.[0-9]*\.[0-9]*/192\.168\.10\.1/g" package/base-files/files/bin/config_generate
 cat>./package/base-files/files/etc/kmodreg<<-\EOF
 #!/bin/bash
 # EzOpenWrt By Sirpdboy
@@ -725,8 +772,8 @@ case "$IPK" in
 esac
 
 EOF
-
-else
+;;
+"Free"*) 
 
 #修改默认IP地址
 sed -i 's/192.168.1.1/192.168.8.1/g' package/base-files/files/bin/config_generate
@@ -735,7 +782,12 @@ sed -i 's/192.168.1.1/192.168.8.1/g' package/base-files/files/bin/config_generat
 sed -i "s/192\.168\.[0-9]*\.[0-9]*/192.168.8.1/g" $(find ./feeds/luci/modules/luci-mod-system/ -type f -name "flash.js")
 #修改默认IP地址
 
-sed -i "s/192\.168\.[0-9]*\.[0-9]*/192.168.8.1/g" package/base-files/files/bin/config_generate
+#sed -i 's/luci-theme-argon/luci-theme-kucat/g' package/istoreos-files/Makefile
+#sed -i 's/192.168.100.1/192.168.8.1/g' package/istoreos-files/Makefile
+#修改immortalwrt.lan关联IP
+sed -i "s/192\.168\.[0-9]*\.[0-9]*/192\.168\.8\.1/g" $(find ./feeds/luci/modules/luci-mod-system/ -type f -name "flash.js")
+#修改默认IP地址
+sed -i "s/192\.168\.[0-9]*\.[0-9]*/192\.168\.8\.1/g" package/base-files/files/bin/config_generate
 
 cat >./package/base-files/files/etc/kmodreg<<-\EOF
 #!/bin/bash
@@ -762,18 +814,30 @@ esac
 exit
 EOF
 
-fi
 
+#修改默认主题
+# sed -i "s/luci-theme-bootstrap/luci-theme-$WRT_THEME/g" $(find ./feeds/luci/collections/ -type f -name "Makefile")
+#添加编译日期标识
+# sed -i "s/(\(luciversion || ''\))/(\1) + (' \/ $WRT_CI-$WRT_DATE')/g" $(find ./feeds/luci/modules/luci-mod-status/ -type f -name "10_system.js")
+#修改默认WIFI名
+# sed -i "s/\.ssid=.*/\.ssid=$WRT_WIFI/g" $(find ./package/kernel/mac80211/ ./package/network/config/ -type f -name "mac80211.*")
+
+#修改默认主机名
+# sed -i "s/hostname='.*'/hostname='$WRT_NAME'/g" $config_generate
+#修改默认时区
+# sed -i "s/timezone='.*'/timezone='Asia\/Shanghai'/g" $config_generate
+;;
+esac
 
 ./scripts/feeds update -i
 ./scripts/feeds install -i
 cat  ./x86_64/${CONFIG_S}  > .config
 case "${CONFIG_S}" in
-"Vip"*)
+Vip*)
 cat  ./x86_64/comm  >> .config
 ;;
 *)
-cat  ./x86_64/comm  >> .config
+echo 'no'
 ;;
 esac
 exit
