@@ -30,73 +30,36 @@ CONFIG_GRUB_TIMEOUT="0"
 CONFIG_GRUB_TITLE="EzOpWrt"
 CONFIG_KERNEL_PAGE_POOL=y
 CONFIG_KERNEL_RELAY=y
-CONFIG_LIBCURL_COOKIES=y
-CONFIG_LIBCURL_FILE=y
-CONFIG_LIBCURL_FTP=y
-CONFIG_LIBCURL_HTTP=y
-CONFIG_LIBCURL_MBEDTLS=y
-CONFIG_LIBCURL_NGHTTP2=y
-CONFIG_LIBCURL_NO_SMB="!"
-CONFIG_LIBCURL_PROXY=y
-CONFIG_LIBCURL_UNIX_SOCKETS=y
+
+
+
 CONFIG_LIBSODIUM_MINIMAL=y
 CONFIG_LUCI_LANG_en=y
 CONFIG_LUCI_LANG_zh_Hans=y
-CONFIG_NGINX_HTTP_ACCESS=y
-CONFIG_NGINX_HTTP_AUTH_BASIC=y
-CONFIG_NGINX_HTTP_AUTOINDEX=y
-CONFIG_NGINX_HTTP_BROWSER=y
-CONFIG_NGINX_HTTP_CACHE=y
-CONFIG_NGINX_HTTP_CHARSET=y
-CONFIG_NGINX_HTTP_EMPTY_GIF=y
-CONFIG_NGINX_HTTP_FASTCGI=y
-CONFIG_NGINX_HTTP_GEO=y
-CONFIG_NGINX_HTTP_GZIP=y
-CONFIG_NGINX_HTTP_GZIP_STATIC=y
-CONFIG_NGINX_HTTP_LIMIT_CONN=y
-CONFIG_NGINX_HTTP_LIMIT_REQ=y
-CONFIG_NGINX_HTTP_MAP=y
-CONFIG_NGINX_HTTP_MEMCACHED=y
-CONFIG_NGINX_HTTP_PROXY=y
-CONFIG_NGINX_HTTP_REFERER=y
-CONFIG_NGINX_HTTP_REWRITE=y
-CONFIG_NGINX_HTTP_SCGI=y
-CONFIG_NGINX_HTTP_SPLIT_CLIENTS=y
-CONFIG_NGINX_HTTP_SSI=y
-CONFIG_NGINX_HTTP_UPSTREAM_HASH=y
-CONFIG_NGINX_HTTP_UPSTREAM_IP_HASH=y
-CONFIG_NGINX_HTTP_UPSTREAM_KEEPALIVE=y
-CONFIG_NGINX_HTTP_UPSTREAM_LEAST_CONN=y
-CONFIG_NGINX_HTTP_USERID=y
-CONFIG_NGINX_HTTP_UWSGI=y
-CONFIG_NGINX_HTTP_V2=y
-CONFIG_NGINX_PCRE=y
-CONFIG_OPENSSL_ENGINE=y
-CONFIG_OPENSSL_OPTIMIZE_SPEED=y
-CONFIG_OPENSSL_WITH_ASM=y
-CONFIG_OPENSSL_WITH_CHACHA_POLY1305=y
-CONFIG_OPENSSL_WITH_CMS=y
-CONFIG_OPENSSL_WITH_DEPRECATED=y
-CONFIG_OPENSSL_WITH_ERROR_MESSAGES=y
-CONFIG_OPENSSL_WITH_IDEA=y
-CONFIG_OPENSSL_WITH_MDC2=y
-CONFIG_OPENSSL_WITH_PSK=y
-CONFIG_OPENSSL_WITH_SEED=y
-CONFIG_OPENSSL_WITH_SRP=y
-CONFIG_OPENSSL_WITH_TLS13=y
-CONFIG_OPENSSL_WITH_WHIRLPOOL=y
-CONFIG_PACKAGE_6in4=y
 CONFIG_PACKAGE_ATH_DFS=y
 CONFIG_PACKAGE_MAC80211_DEBUGFS=y
 CONFIG_PACKAGE_MAC80211_MESH=y
-CONFIG_PACKAGE_NTFS-3G_HAS_PROBE=y
-CONFIG_PACKAGE_adguardhome=y
+
+CONFIG_OPENSSL_WITH_ASM=y
+CONFIG_OPENSSL_OPTIMIZE_SPEED=y
+CONFIG_OPENSSL_ENGINE=y
 CONFIG_PACKAGE_airplay2-openssl=y
-CONFIG_PACKAGE_alist=y
+CONFIG_PACKAGE_libopenssl-afalg=y
+CONFIG_PACKAGE_libopenssl-conf=y
+CONFIG_PACKAGE_libopenssl-conf=y
+CONFIG_PACKAGE_libopenssl-legacy=y
+CONFIG_PACKAGE_libopenssl-devcrypto=y
+CONFIG_PACKAGE_libopenssl-legacy=y
+CONFIG_PACKAGE_openssl-util=y
+# CONFIG_PACKAGE_libopenssl-padlock is not set
+# CONFIG_OPENSSL_WITH_ERROR_MESSAGES is not set
+CONFIG_PACKAGE_libopenssl=y
+CONFIG_PACKAGE_ariang=y  #UHTTPD
+
 CONFIG_PACKAGE_alsa-lib=y
 CONFIG_PACKAGE_alsa-ucm-conf=y
 CONFIG_PACKAGE_alsa-utils=y
-CONFIG_PACKAGE_appfilter=y
+CONFIG_PACKAGE_zoneinfo-asia=y  #time fast 
 CONFIG_PACKAGE_ath10k-board-qca9377=y
 CONFIG_PACKAGE_ath10k-board-qca9984=y
 CONFIG_PACKAGE_ath10k-board-qca99x0=y
@@ -107,7 +70,6 @@ CONFIG_PACKAGE_ath10k-firmware-qca99x0=y
 CONFIG_PACKAGE_ath11k-firmware-wcn6855=y
 CONFIG_PACKAGE_ath9k-htc-firmware=y
 CONFIG_PACKAGE_attr=y
-CONFIG_PACKAGE_avahi-dbus-daemon=y
 CONFIG_PACKAGE_fuse-utils=y
 CONFIG_PACKAGE_bash=y
 CONFIG_PACKAGE_jq=y
@@ -122,56 +84,72 @@ CONFIG_PACKAGE_btrfs-progs=y
 CONFIG_PACKAGE_ca-certificates=y
 CONFIG_PACKAGE_carl9170-firmware=y
 CONFIG_PACKAGE_cgi-io=y
-CONFIG_PACKAGE_chinadns-ng=y
 CONFIG_PACKAGE_coreutils=y
 CONFIG_PACKAGE_coreutils-base64=y
 CONFIG_PACKAGE_coreutils-nohup=y
 CONFIG_PACKAGE_dbus=y
+
 CONFIG_PACKAGE_ddns-scripts=y
-CONFIG_PACKAGE_ddns-scripts-aliyun=y
 CONFIG_PACKAGE_ddns-scripts-cloudflare=y
 CONFIG_PACKAGE_ddns-scripts-dnspod=y
 CONFIG_PACKAGE_ddns-scripts-freedns=y
 CONFIG_PACKAGE_ddns-scripts-godaddy=y
 CONFIG_PACKAGE_ddns-scripts-services=y
+CONFIG_PACKAGE_ddns-scripts_aliyun=y
+CONFIG_PACKAGE_ddns-scripts_cloudflare.com-v4=y
+CONFIG_PACKAGE_ddns-scripts_freedns_42_pl=y
+CONFIG_PACKAGE_ddns-scripts_godaddy.com-v1=y
+CONFIG_PACKAGE_ddns-scripts_no-ip_com=y
+
 CONFIG_PACKAGE_default-settings=y
 CONFIG_PACKAGE_default-settings-chn=y
 CONFIG_PACKAGE_dns2socks=y
 # CONFIG_PACKAGE_dnsmasq is not set
-CONFIG_PACKAGE_dnsmasq-full=y
-CONFIG_PACKAGE_dnsmasq_full_auth=y
-CONFIG_PACKAGE_dnsmasq_full_conntrack=y
-CONFIG_PACKAGE_dnsmasq_full_dhcp=y
+#ipv6
+CONFIG_PACKAGE_ipv6helper=y
 CONFIG_PACKAGE_dnsmasq_full_dhcpv6=y
-CONFIG_PACKAGE_dnsmasq_full_dnssec=y
-CONFIG_PACKAGE_dnsmasq_full_noid=y
-CONFIG_PACKAGE_dnsmasq_full_tftp=y
-CONFIG_PACKAGE_dosfstools=y
+CONFIG_PACKAGE_6in4=y
+CONFIG_PACKAGE_6rd=y
+CONFIG_PACKAGE_6to4=y
+
+### Curl
+CONFIG_PACKAGE_curl=y
+CONFIG_PACKAGE_libcurl=y
+CONFIG_LIBCURL_NGHTTP3=y
+CONFIG_LIBCURL_NGTCP2=y
+CONFIG_LIBCURL_OPENSSL=y
+# CONFIG_LIBCURL_GNUTLS is not set
+# CONFIG_LIBCURL_MBEDTLS is not set
+# CONFIG_LIBCURL_NOSSL is not set
+# CONFIG_LIBCURL_WOLFSSL is not set
+
 CONFIG_PACKAGE_etherwake=y
-CONFIG_PACKAGE_ethtool=m
+CONFIG_PACKAGE_ethtool=y
 CONFIG_PACKAGE_exfat-fsck=y
 CONFIG_PACKAGE_exfat-mkfs=y
 CONFIG_PACKAGE_fdisk=y
 CONFIG_PACKAGE_fdk-aac=y
-CONFIG_PACKAGE_frpc=y
 CONFIG_PACKAGE_geoview=y
-CONFIG_PACKAGE_haproxy=y
 CONFIG_PACKAGE_hostapd-common=y
 CONFIG_PACKAGE_hysteria=y
 CONFIG_PACKAGE_ip-full=y
-CONFIG_PACKAGE_ip6tables-mod-nat=y
-CONFIG_PACKAGE_ip6tables-nft=y
 CONFIG_PACKAGE_iperf3=y
 CONFIG_PACKAGE_iperf3-ssl=y
 CONFIG_PACKAGE_ipset=y
 CONFIG_PACKAGE_ipt2socks=y
+
+### Firewall
+CONFIG_PACKAGE_nat6=y
+CONFIG_PACKAGE_ip6tables-nft=y
 CONFIG_PACKAGE_iptables-mod-conntrack-extra=y
-CONFIG_PACKAGE_iptables-mod-filter=y
 CONFIG_PACKAGE_iptables-mod-iprange=y
 CONFIG_PACKAGE_iptables-mod-nat-extra=y
 CONFIG_PACKAGE_iptables-mod-socket=y
 CONFIG_PACKAGE_iptables-mod-tproxy=y
 CONFIG_PACKAGE_iptables-nft=y
+CONFIG_PACKAGE_xtables-nft=y
+# CONFIG_PACKAGE_iptables-legacy is not set
+
 CONFIG_PACKAGE_iw=y
 CONFIG_PACKAGE_iwinfo=y
 CONFIG_PACKAGE_iwlwifi-firmware-ax200=y
@@ -265,7 +243,6 @@ CONFIG_PACKAGE_kmod-hid-generic=y
 CONFIG_PACKAGE_kmod-ifb=y
 CONFIG_PACKAGE_kmod-inet-diag=y
 CONFIG_PACKAGE_kmod-input-evdev=y
-CONFIG_PACKAGE_kmod-ip6tables=y
 CONFIG_PACKAGE_kmod-ipt-conntrack=y
 CONFIG_PACKAGE_kmod-ipt-conntrack-extra=y
 CONFIG_PACKAGE_kmod-ipt-core=y
@@ -339,7 +316,6 @@ CONFIG_PACKAGE_kmod-nls-cp932=y
 CONFIG_PACKAGE_kmod-nls-cp936=y
 CONFIG_PACKAGE_kmod-nls-cp950=y
 CONFIG_PACKAGE_kmod-nls-ucs2-utils=y
-CONFIG_PACKAGE_kmod-oaf=y
 CONFIG_PACKAGE_kmod-oid-registry=y
 CONFIG_PACKAGE_kmod-phy-ax88796b=y
 CONFIG_PACKAGE_kmod-phy-smsc=y
@@ -363,7 +339,6 @@ CONFIG_PACKAGE_kmod-sched-core=y
 CONFIG_PACKAGE_kmod-scsi-core=y
 CONFIG_PACKAGE_kmod-sit=y
 CONFIG_PACKAGE_kmod-sound-core=y
-CONFIG_PACKAGE_kmod-thermal=y
 CONFIG_PACKAGE_kmod-tun=y
 CONFIG_PACKAGE_kmod-udptunnel4=y
 CONFIG_PACKAGE_kmod-udptunnel6=y
@@ -432,7 +407,7 @@ CONFIG_PACKAGE_libcap=y
 CONFIG_PACKAGE_libcap-ng=y
 CONFIG_PACKAGE_libcares=y
 CONFIG_PACKAGE_libconfig=y
-CONFIG_PACKAGE_libcurl=y
+
 CONFIG_PACKAGE_libdaemon=y
 CONFIG_PACKAGE_libdbus=y
 CONFIG_PACKAGE_libelf=y
@@ -468,9 +443,6 @@ CONFIG_PACKAGE_libnetfilter-conntrack=y
 CONFIG_PACKAGE_libnettle=y
 CONFIG_PACKAGE_libnfnetlink=y
 CONFIG_PACKAGE_libnghttp2=y
-CONFIG_PACKAGE_libopenssl=y
-CONFIG_PACKAGE_libopenssl-conf=y
-CONFIG_PACKAGE_libopenssl-legacy=y
 CONFIG_PACKAGE_libparted=y
 CONFIG_PACKAGE_libpcap=y
 CONFIG_PACKAGE_libpcre2=y
@@ -509,6 +481,8 @@ CONFIG_PACKAGE_luci-theme-design=y
 CONFIG_PACKAGE_luci-theme-material=y
 CONFIG_PACKAGE_luci-theme-edge=y
 CONFIG_PACKAGE_luci-app-nft-timecontrol=y
+
+CONFIG_PACKAGE_luci-app-filetransfer=y
 
 CONFIG_PACKAGE_luci-app-adguardhome=y
 CONFIG_PACKAGE_luci-app-advancedplus=y
@@ -567,13 +541,14 @@ CONFIG_PACKAGE_luci-app-samba4=y
 CONFIG_PACKAGE_luci-app-smartdns=y
 CONFIG_PACKAGE_luci-app-socat=y
 CONFIG_PACKAGE_luci-app-ttyd=y
-CONFIG_PACKAGE_luci-app-uhttpd=y
+# CONFIG_PACKAGE_luci-app-uhttpd=y
 CONFIG_PACKAGE_luci-app-upnp=y
 
 # CONFIG_PACKAGE_luci-app-vnstat2=y
 
 CONFIG_PACKAGE_luci-app-wolplus=y
-#CONFIG_PACKAGE_luci-app-zerotier=y
+# CONFIG_PACKAGE_luci-app-zerotier=y
+
 CONFIG_PACKAGE_luci-base=y
 CONFIG_PACKAGE_luci-compat=y
 CONFIG_PACKAGE_luci-lib-base=y
@@ -581,27 +556,21 @@ CONFIG_PACKAGE_luci-lib-ip=y
 CONFIG_PACKAGE_luci-lib-ipkg=y
 CONFIG_PACKAGE_luci-lib-jsonc=y
 CONFIG_PACKAGE_luci-lib-nixio=y
+
 CONFIG_PACKAGE_luci-lib-uqr=y
 CONFIG_PACKAGE_luci-lua-runtime=y
 CONFIG_PACKAGE_luci-mod-admin-full=y
 CONFIG_PACKAGE_luci-mod-network=y
 CONFIG_PACKAGE_luci-mod-status=y
 CONFIG_PACKAGE_luci-mod-system=y
-CONFIG_PACKAGE_luci-nginx=y
 CONFIG_PACKAGE_luci-proto-ipv6=y
 CONFIG_PACKAGE_luci-proto-ppp=y
 CONFIG_PACKAGE_luci-proto-wireguard=y
 CONFIG_PACKAGE_mdadm=y
-CONFIG_PACKAGE_microsocks=y
 CONFIG_PACKAGE_miniupnpd-nftables=y
-CONFIG_PACKAGE_mosdns=y
 CONFIG_PACKAGE_mt7601u-firmware=y
 CONFIG_PACKAGE_mt7921bt-firmware=y
 CONFIG_PACKAGE_mt7922bt-firmware=y
-CONFIG_PACKAGE_nginx-mod-luci=y
-CONFIG_PACKAGE_nginx-mod-ubus=y
-CONFIG_PACKAGE_nginx-ssl=y
-CONFIG_PACKAGE_nginx-ssl-util=y
 CONFIG_PACKAGE_nikki=y
 CONFIG_PACKAGE_nqptp=y
 CONFIG_PACKAGE_ntfs-3g=y
@@ -623,33 +592,7 @@ CONFIG_PACKAGE_rs9113-firmware=y
 CONFIG_PACKAGE_rt2800-usb-firmware=y
 CONFIG_PACKAGE_rt73-usb-firmware=y
 CONFIG_PACKAGE_rtl8192cu-firmware=y
-CONFIG_PACKAGE_ruby=y
-CONFIG_PACKAGE_ruby-bigdecimal=y
-CONFIG_PACKAGE_ruby-date=y
-CONFIG_PACKAGE_ruby-digest=y
-CONFIG_PACKAGE_ruby-enc=y
-CONFIG_PACKAGE_ruby-pstore=y
-CONFIG_PACKAGE_ruby-psych=y
-CONFIG_PACKAGE_ruby-stringio=y
-CONFIG_PACKAGE_ruby-yaml=y
-CONFIG_PACKAGE_samba4-libs=y
-CONFIG_PACKAGE_samba4-server=y
-CONFIG_PACKAGE_shadowsocks-libev-config=y
-CONFIG_PACKAGE_shadowsocks-libev-ss-local=y
-CONFIG_PACKAGE_shadowsocks-libev-ss-redir=y
-CONFIG_PACKAGE_shadowsocks-libev-ss-server=y
-CONFIG_PACKAGE_shadowsocksr-libev-ssr-local=y
-CONFIG_PACKAGE_shadowsocksr-libev-ssr-redir=y
-CONFIG_PACKAGE_shadowsocksr-libev-ssr-server=y
-CONFIG_PACKAGE_sing-box=y
-CONFIG_PACKAGE_smartdns=y
-CONFIG_PACKAGE_smartmontools=y
 CONFIG_PACKAGE_socat=y
-CONFIG_PACKAGE_taskset=y
-CONFIG_PACKAGE_tc-tiny=y
-CONFIG_PACKAGE_tcping=y
-CONFIG_PACKAGE_terminfo=y
-CONFIG_PACKAGE_ttyd=y
 CONFIG_PACKAGE_ucode-mod-html=y
 CONFIG_PACKAGE_ucode-mod-lua=y
 CONFIG_PACKAGE_ucode-mod-math=y
@@ -659,29 +602,16 @@ CONFIG_PACKAGE_ucode-mod-uloop=y
 CONFIG_PACKAGE_uhttpd=y
 CONFIG_PACKAGE_uhttpd-mod-ubus=y
 CONFIG_PACKAGE_htop=y
-CONFIG_PACKAGE_curl=y
 CONFIG_PACKAGE_snmpd=y
 CONFIG_PACKAGE_unzip=y
 CONFIG_PACKAGE_blkid=y
 CONFIG_PACKAGE_hdparm=y
-CONFIG_PACKAGE_uwsgi=y
-CONFIG_PACKAGE_uwsgi-cgi-plugin=y
-CONFIG_PACKAGE_uwsgi-luci-support=y
-CONFIG_PACKAGE_uwsgi-syslog-plugin=y
-CONFIG_PACKAGE_v2dat=y
-CONFIG_PACKAGE_v2ray-geoip=y
-CONFIG_PACKAGE_v2ray-geosite=y
-CONFIG_PACKAGE_vim=y
 CONFIG_PACKAGE_wget-ssl=y
 CONFIG_PACKAGE_wifi-scripts=y
 CONFIG_PACKAGE_wireguard-tools=y
 CONFIG_PACKAGE_wireless-regdb=y
 CONFIG_PACKAGE_wpad-openssl=y
-CONFIG_PACKAGE_wsdd2=y
-CONFIG_PACKAGE_xray-core=y
-CONFIG_PACKAGE_xtables-nft=y
 CONFIG_PACKAGE_yq=y
-CONFIG_PACKAGE_zerotier=y
 CONFIG_PACKAGE_zlib=y
 CONFIG_PACKAGE_zram-swap=y
 CONFIG_PACKAGE_zsh=y
@@ -705,11 +635,6 @@ CONFIG_WPA_MBO_SUPPORT=y
 CONFIG_WPA_MSG_MIN_PRIORITY=3
 CONFIG_ZRAM_DEF_COMP_LZORLE=y
 # CONFIG_PACKAGE_boost is not set
-# CONFIG_PACKAGE_luci-app-passwall2_INCLUDE_V2ray_Plugin is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_Trojan_Plus is not set
-# CONFIG_PACKAGE_luci-app-passwall_INCLUDE_V2ray_Plugin is not set
-# CONFIG_PACKAGE_trojan-plus is not set
-# CONFIG_PACKAGE_v2ray-plugin is not set
 
 CONFIG_PACKAGE_kmod-igb=y
 CONFIG_PACKAGE_kmod-igc=y
