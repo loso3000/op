@@ -188,6 +188,7 @@ rm -rf  ./feeds/luci/applications/luci-app-timecontrol
 rm -rf  ./feeds/luci/applications/luci-app-socat
 rm -rf  ./feeds/luci/applications/luci-app-fileassistant
 rm -rf  ./feeds/luci/applications/luci-app-control-speedlimit
+rm -rf  ./feeds/luci/applications/luci-app-syncdial
 
 # rm -rf  ./feeds/packages/net/wget
 # mv -rf ./package/wget  ./feeds/packages/net/wget
