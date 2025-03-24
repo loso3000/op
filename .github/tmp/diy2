@@ -40,6 +40,9 @@ mkdir -p ./package/emortal
 [[ -n $TARGET_DEVICE ]] || TARGET_DEVICE="x86_64"
 [[ -n $CONFIG_S ]] || CONFIG_S=Vip-Super
 
+rm -rf ./feeds/luci/applications/luci-app-appfilter
+rm -rf ./feeds/luci/applications/luci-app-filter
+rm -rf ./feeds/luci/applications/luci-app-oaf
 rm -rf ./feeds/luci/luci-app-appfilter
 rm -rf ./feeds/luci/luci-app-filter
 rm -rf ./feeds/luci/luci-app-oaf
@@ -195,8 +198,6 @@ rm -rf  ./feeds/luci/applications/luci-app-syncdial
 rm -rf ./feeds/packages/net/aria2
 rm -rf ./feeds/luci/applications/luci-app-aria2  package/feeds/packages/luci-app-aria2
 
-# rm -rf $(find ./package/ -type d -regex ".*\(luci-app-autotimeset\luci-app-autotimeset).*")
-# rm -rf $(find ./feeds/ -type d -regex ".*\(luci-app-autotimeset\luci-app-autotimeset).*")
 
 # Passwall
 
