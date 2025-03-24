@@ -50,6 +50,8 @@ rm -rf  ./feeds/luci/applications/luci-app-arpbind
 rm -rf  ./feeds/packages/net/oaf
 #rm -rf  ./feeds/packages/net/wget
 
+rm -rf  ./feeds/packages/net/ddns-scripts
+
 # rm -rf  ./feeds/packages/rust
 # rm -rf  ./feeds/packages/lang/rust
 
@@ -143,7 +145,6 @@ rm -rf ./feeds/luci/applications/luci-app-smartdns
 rm -rf ./feeds/luci/applications/luci-app-wolplus
 rm -rf ./feeds/luci/applications/luci-app-wrtbwmon
 
-rm -rf  ./feeds/luci/applications/luci-app-upnp
 rm -rf ./feeds/luci/applications/luci-app-udpxy
 rm -rf ./feeds/luci/applications/luci-app-adguardhome
 rm -rf ./feeds/luci/applications/luci-app-mosdns
@@ -459,11 +460,6 @@ sed -i 's/+luci-theme-bootstrap/+luci-theme-kucat/g' feeds/luci/collections/luci
 # find package/luci-theme-*/* -type f -name '*luci-theme-*' -print -exec sed -i '/set luci.main.mediaurlbase/d' {} \;
 sed -i '/check_signature/d' ./package/system/opkg/Makefile   # 删除IPK安装签名
 
-# ddns - fix boot
-sed -i '/boot()/,+2d' feeds/packages/net/ddns-scripts/files/etc/init.d/ddns
-
-
-sed -i 's/START=95/START=99/' `find package/ -follow -type f -path */ddns-scripts/files/ddns.init`
 #Add x550
 git clone https://github.com/shenlijun/openwrt-x550-nbase-t package/openwrt-x550-nbase-t
 
