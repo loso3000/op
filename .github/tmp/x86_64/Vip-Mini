@@ -450,6 +450,13 @@ CONFIG_DOCKER_NET_OVERLAY=y
 CONFIG_DOCKER_NET_TFTP=y
 CONFIG_PACKAGE_containerd=y
 CONFIG_PACKAGE_dockerd=y
+#add docker yila
+CONFIG_PACKAGE_kmod-fs-btrfs=y
+CONFIG_PACKAGE_kmod-ipt-extra=y
+CONFIG_PACKAGE_kmod-ipt-physdev=y
+CONFIG_PACKAGE_kmod-nf-ipvs=y
+CONFIG_PACKAGE_kmod-ipt-fullconenat=y
+
 ### Display & Extra Drivers
 CONFIG_PACKAGE_kmod-backlight-pwm=y
 CONFIG_PACKAGE_kmod-backlight=y
