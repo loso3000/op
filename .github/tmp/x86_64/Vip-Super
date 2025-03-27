@@ -481,7 +481,7 @@ CONFIG_DEFAULT_kmod-vmxnet3=y
 
 #docker
 # CONFIG_PACKAGE_luci-app-docker=y
-CONFIG_PACKAGE_luci-app-dockerman=y
+CONFIG_PACKAGE_luci-app-dockerman=m
 CONFIG_PACKAGE_luci-lib-docker=y
 CONFIG_DOCKER_KERNEL_OPTIONS=y
 CONFIG_DOCKER_NET_ENCRYPT=y
