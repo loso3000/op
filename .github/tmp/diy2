@@ -127,14 +127,6 @@ git clone https://git.kejizero.online/zhao/package_kernel_r8101 package/kernel/r
 git clone https://git.kejizero.online/zhao/package_kernel_r8125 package/kernel/r8125
 git clone https://git.kejizero.online/zhao/package_kernel_r8126 package/kernel/r8126
 
-# Docker
-# rm -rf feeds/luci/collections/luci-lib-docker
-#git clone https://github.com/lisaac/luci-app-dockerman feeds/luci/applications/luci-app-dockerman
-#git clone https://github.com/lisaac/luci-lib-docker feeds/luci/collections/luci-lib-docker
-
-rm -rf feeds/luci/applications/luci-app-dockerman
-#git clone https://git.kejizero.online/zhao/luci-app-dockerman feeds/luci/applications/luci-app-dockerman
-rm -rf feeds/packages/utils/{docker,dockerd,containerd,runc}
 
 #删除冲突插件
 # rm -rf $(find ./feeds/luci/ -type d -regex ".*\(argon\|design\|openclash\).*")
@@ -337,6 +329,16 @@ rm -rf ./package/add/up/tool/autocore
 
 rm -rf ./package/add/up/pass/xray-core
 
+
+# Docker
+# rm -rf feeds/luci/collections/luci-lib-docker
+#git clone https://github.com/lisaac/luci-app-dockerman feeds/luci/applications/luci-app-dockerman
+#git clone https://github.com/lisaac/luci-lib-docker feeds/luci/collections/luci-lib-docker
+
+# rm -rf feeds/luci/applications/luci-app-dockerman
+# git clone https://git.kejizero.online/zhao/luci-app-dockerman feeds/luci/applications/luci-app-dockerman
+# rm -rf feeds/packages/utils/{docker,dockerd,containerd,runc}
+rm -rf ./package/add/up/docke
 
 #istoreos
 rm -rf ./package/diy/luci-app-ota
