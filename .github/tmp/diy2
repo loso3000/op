@@ -267,8 +267,6 @@ rm -rf ./package/ssr/trojan-plus
 #rm -rf ./package/ssr/redsocks2
 #rm -rf ./package/ssr/shadow-tls
 
-#istoreos-files
-rm -rf ./package/istoreos-files
 
  rm -rf ./feeds/packages/net/brook
  rm -rf ./feeds/packages/net/chinadns-ng
@@ -389,8 +387,8 @@ mkdir -p package/system/opkg/patches
 curl -s https://raw.githubusercontent.com/oppen321/ZeroWrt-Action/refs/heads/master/patch/opkg/0001-opkg-download-disable-hsts.patch > package/system/opkg/patches/0001-opkg-download-disable-hsts.patch
 curl -s https://raw.githubusercontent.com/oppen321/ZeroWrt-Action/refs/heads/master/patch/opkg/0002-libopkg-opkg_install-copy-conffiles-to-the-system-co.patch > package/system/opkg/patches/0002-libopkg-opkg_install-copy-conffiles-to-the-system-co.patch
 
-#istoreos
-rm -rf ./package/diy/luci-app-ota
+#istoreos-files
+rm -rf ./package/diy
 rm -rf ./package/istoreos-files
 
 cat  patch/banner > ./package/base-files/files/etc/banner
