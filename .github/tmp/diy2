@@ -218,6 +218,8 @@ mv -f ./package/add/up/tool/smartdns/smartdns  ./feeds/packages/net/smartdns
 
 # rm -rf ./package/add/luci-app-mwan3 ./package/add/mwan3
 # rm -rf ./feeds/luci/applications/luci-app-mwan3
+rm -rf ./feeds/packages/net/mwan3
+mv ./package/add/up/tool/mwan3 ./feeds/packages/net/mwan3
 
 # rm -rf ./package/ssr/luci-app-passwall2/htdocs/luci-static/resources/
 # rm -rf ./package/ssr/luci-app-homeproxy
@@ -321,13 +323,6 @@ rm -rf ./package/add/up/tool/autocore
 
 
 rm -rf ./package/add/up/pass/xray-core
-
-
-
-
-
-
-
 
 
 # Docker
@@ -619,6 +614,8 @@ find ./bin/ -name "*dockerd*" | xargs -i cp -f {} $kmoddirdocker
 EOF
 case "${CONFIG_S}" in
      "Vip"*)  
+#修改默认IP地址
+sed -i 's/192.168.1.1/192.168.10.1/g' package/base-files/files/bin/config_generate
 
 #修改默认IP地址
 sed -i 's/192\.168\.1\.1/192\.168\.10\.1/g' package/base-files/files/bin/config_generate
