@@ -1,13 +1,12 @@
 <ul>
 <li>下面是具体更新内容：</li>
 </ul>
-1.升级进阶设置，增加防火墙设置，将默认防火墙被【入站数据】拒绝改为接受 。
-2.升级应用过滤，可以三种方式更新应用过滤特征库存,并且增加用户特征库。
-3.升级DOCKER内核版本28.0.4,在进阶设置，插件加载中可以加载DOCKER和所有驱动和应用商店。
-4.应TG群好友提议 ，极致版加入keeplived缺少的二个依赖macvlan和ipvs。
-5.同步更新至最新官方24.10及全部插件更新到最新版本， 更多细节优化请自行刷机体验。
+1.升级docker到28.0.4和相关依赖 【独家研发】。
+2.修复Upnp服务问题，应TG群友提议，集成CIFS和wireguard等相关依赖。
+3.修复上一版需要启用防火墙流量卸载类型，才能正常使用问题。
+4.同步更新全部插件更新到最新版本，解决目前已经所有问题，更多细节优化请自行刷机体验。
 
 【注意】根据虚拟机和实际情况出发，WAN口绑定方案：单网口时eth0为LAN口，多网口最后一个口为WAN其余是LAN口
 <ul>
-    <li><a href="https://github.com/sirpdboy/openwrt/discussions/558" target="_blank">点击这里</a>查看详情</li>
+    <li><a href="https://github.com/sirpdboy/openwrt/discussions/560" target="_blank">点击这里</a>查看详情</li>
 </ul>
