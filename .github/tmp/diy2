@@ -213,6 +213,8 @@ rm -rf  ./feeds/packages/net/oaf
 rm -rf feeds/packages/lang/golang
 git clone https://$github/sbwml/packages_lang_golang -b 24.x feeds/packages/lang/golang
 
+# rm -rf ./feeds/luci/applications/luci-app-smartdns
+# rm -rf  ./feeds/packages/net/smartdns
 # rm -rf ./package/add/luci-app-mwan3 ./package/add/mwan3
 # rm -rf ./feeds/luci/applications/luci-app-mwan3
 rm -rf ./feeds/packages/net/mwan3
@@ -587,6 +589,7 @@ ip=` cat  package/base-files/files/bin/config_generate | grep "n) ipad" |awk -F 
 [[ -n $ip ]] || ip=192.168.10.1
 
 OTA_URL="https://$github/$auth/releases/download"
+. ../ezopenwrt_version
 if [ -f ${md5_EzOpWrt} ] ;then
 file_size=$(du -m  ${md5_EzOpWrt} | cut -f1)
 SHA256=$(sha256sum ${md5_EzOpWrt} | awk '{print $1}')
