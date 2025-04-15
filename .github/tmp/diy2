@@ -594,23 +594,24 @@ ip=` cat  package/base-files/files/bin/config_generate | grep "n) ipad" |awk -F 
 
 OTA_URL="https://$github/$auth/releases/download"
 if [ -f ${md5_EzOpWrt} ] ;then
-file_size=`du -m  ${md5_EzOpWrt} | cut -f1`
-SHA256=`sha256sum ${md5_EzOpWrt} | awk '{print $1}'`
-cat > ezota.json <<EOF
-{
-  "${TARGET_DEVICE}": [
+   file_size=`du -m  ${md5_EzOpWrt} | cut -f1`
+   SHA256=`sha256sum ${md5_EzOpWrt} | awk '{print $1}'`
+
+    cat>ezota.json<<EOF
     {
-      "ver": "${EZVER}",
-      "name": "${md5_EzOpWrt}",
-      "size": "${file_size}",
-      "date": "$EZDATE",
-      "sha256": "$SHA256",
-      "ip": "${ip}",
-      "url": "${OTA_URL}/${EZVER}/${md5_EzOpWrt}"
+        "${TARGET_DEVICE}": [
+        {
+            "ver": "${EZVER}",
+            "name": "${md5_EzOpWrt}",
+            "size": "${file_size}",
+            "date": "$EZDATE",
+            "sha256": "$SHA256",
+            "ip": "${ip}",
+            "url": "${OTA_URL}/${EZVER}/${md5_EzOpWrt}"
+        }
+        ]
     }
-  ]
-}
-EOF
+    EOF
 fi
 
 if [ -f ${md5_EzOpWrt_uefi} ] ;then
