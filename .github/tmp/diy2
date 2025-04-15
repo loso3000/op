@@ -3,6 +3,7 @@
 # private gitea
 gitea=git.cooluc.com
 github="github.com"
+auth="sirpdboy/openwrt"
 mirror=https://init.cooluc.com
 mirror=raw.githubusercontent.com/coolsnowwolf/lede/master
 
@@ -399,15 +400,6 @@ sed -i 's/procd_set_param stdout 1/procd_set_param stdout 0/g' feeds/packages/ut
 sed -i 's/procd_set_param stderr 1/procd_set_param stderr 0/g' feeds/packages/utils/ttyd/files/ttyd.init
 sed -i 's|/bin/login|/bin/login -f root|' ./feeds/packages/utils/ttyd/files/ttyd.config
 
-# uwsgi
-sed -i 's,procd_set_param stderr 1,procd_set_param stderr 0,g' feeds/packages/net/uwsgi/files/uwsgi.init
-sed -i 's,buffer-size = 10000,buffer-size = 131072,g' feeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
-sed -i 's,logger = luci,#logger = luci,g' feeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
-sed -i '$a cgi-timeout = 600' feeds/packages/net/uwsgi/files-luci-support/luci-*.ini
-sed -i 's/threads = 1/threads = 2/g' feeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
-sed -i 's/processes = 3/processes = 4/g' feeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
-sed -i 's/cheaper = 1/cheaper = 2/g' feeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
-
 # UPnP
 rm -rf ./package/add/up/luci-app-upnp
 rm -rf feeds/{packages/net/miniupnpd,luci/applications/luci-app-upnp}
@@ -422,6 +414,14 @@ pushd feeds/luci
     # curl -fsSL  https://raw.githubusercontent.com/loso3000/other/master/patch/luci/0003-luci-mod-status-storage-index-applicable-only-to-val-storage2305.patch | patch -p1  #storeage2305lean
     # curl -fsSL  https://raw.githubusercontent.com/loso3000/other/master/patch/luci/0004-luci-luci-app-upnp-ipurl-upnp2305.patch | patch -p1  #upnp2305lean
 popd
+# uwsgi
+sed -i 's,procd_set_param stderr 1,procd_set_param stderr 0,g' feeds/packages/net/uwsgi/files/uwsgi.init
+sed -i 's,buffer-size = 10000,buffer-size = 131072,g' feeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
+sed -i 's,logger = luci,#logger = luci,g' feeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
+sed -i '$a cgi-timeout = 600' feeds/packages/net/uwsgi/files-luci-support/luci-*.ini
+sed -i 's/threads = 1/threads = 2/g' feeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
+sed -i 's/processes = 3/processes = 4/g' feeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
+sed -i 's/cheaper = 1/cheaper = 2/g' feeds/packages/net/uwsgi/files-luci-support/luci-webui.ini
 sed -i 's/"Argon 主题设置"/"Argon设置"/g' `grep "Argon 主题设置" -rl ./`
 sed -i 's/"Turbo ACC 网络加速"/"网络加速"/g' `grep "Turbo ACC 网络加速" -rl ./`
 sed -i 's/"网络存储"/"存储"/g' `grep "网络存储" -rl ./`
@@ -583,17 +583,19 @@ ip=` cat  package/base-files/files/bin/config_generate | grep "n) ipad" |awk -F 
 
 OTA_URL="https://$github/$auth/releases/download"
 [ -f ${md5_EzOpWrt} ] && {  
+file_size=$(du -m  ${md5_EzOpWrt} | cut -f1)
 SHA256=$(sha256sum ${md5_EzOpWrt} | awk '{print $1}')
 cat > ezota.json <<EOF
 {
   "${TARGET_DEVICE}": [
     {
-      "build_date": "$DATA",
-      "sha256sum": "$SHA256",
       "ver": "${r_version}",
-      "ip": "${$ip}",
-      "name": "${md5_EzOpWrt}"
-      "url": "$OTA_URL/v$VERSION/${md5_EzOpWrt}"
+      "name": "${md5_EzOpWrt}",
+      "size": "${file_size}",
+      "date": "$DATA",
+      "sha256": "$SHA256",
+      "ip": "${ip}",
+      "url": "$OTA_URL/${r_version}/${md5_EzOpWrt}"
     }
   ]
 }
@@ -602,30 +604,33 @@ EOF
 }
 
 [ -f ${md5_EzOpWrt_uefi} ] && {
+file_size=$(du -m  ${md5_EzOpWrt_uefi} | cut -f1)
 SHA256=$(sha256sum ${md5_EzOpWrt_uefi} | awk '{print $1}')
 cat >> ezota.json <<EOF
 {
   "${TARGET_DEVICE}": [
     {
-      "build_date": "$DATA",
-      "sha256sum": "$SHA256",
       "ver": "${r_version}",
-      "ip": "${$ip}",
-      "name": "${md5_EzOpWrt_uefi}"
-      "url": "$OTA_URL/v$VERSION/${md5_EzOpWrt_uefi}"
+      "name": "${md5_EzOpWrt_uefi}",
+      "size": "${file_size}",
+      "date": "$DATA",
+      "sha256": "$SHA256",
+      "ip": "${ip}",
+      "url": "$OTA_URL/${r_version}/${md5_EzOpWrt_uefi}"
     }
   ]
 }
 EOF
 }
 
+cp ./ezota.json ../../../../files/etc/ezota.json
 if [ ${CONFIG_S} = "Vip-Super" ] ; then
 cp ../../../../ezotafooter  ./ota.footer
 cp ../../../../ezverlatest  ./ver.latest 
 
 fi
 popd
-
+cat ./package/base-files/files/etc/ezopenwrt_version  ../ezopenwrt_version
 EOF
 
 
