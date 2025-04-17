@@ -103,7 +103,7 @@ return baseclass.extend({
 				E('td', { 'class': 'td right', 'width': '33%' }, [ fields[i] ]),
 				E('td', { 'class': 'td left' }, [ (fields[i + 1] != null) ? fields[i + 1] : '?' ])
 			]));
-		};
+		}
         table.appendChild(E('tr', { 
             'class': 'tr' 
         }, [
