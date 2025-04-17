@@ -532,7 +532,7 @@ date1="${CONFIG_S}-${DATA}-${VER1}.${ver612}"
 fi
 echo "EZVER=${date1}" > ./files/etc/ezopenwrt_version
 echo "EZDATE=$DATA" >> ./files/etc/ezopenwrt_version
-cp  ./files/etc/ezopenwrt_version ../ezopenwrt_version
+cp  ./files/etc/ezopenwrt_version /builder/ezopenwrt_version
 echo "${date2}" >> ./files/etc/banner
 #tokenfile
 cp -r  ./package/add/patch/GithubvToken ./files/etc/ezgithub
@@ -549,7 +549,7 @@ cat>buildmd5.sh<<\EOF
 
 github="github.com"
 auth="sirpdboy/openwrt"
-. ../ezopenwrt_version
+. /builder/ezopenwrt_version
 # gzip bin/targets/*/*/*.img | true
 
 pushd bin/targets/*/*/
@@ -579,11 +579,12 @@ ip=` cat  package/base-files/files/bin/config_generate | grep "n) ipad" |awk -F 
 [[ -n $ip ]] || ip=` cat package/base-files/luci2/bin/config_generate | grep "n) ipad" |awk -F '\"' '{print $2}'`
 [[ -n $ip ]] || ip="192.168.10.1"
 
+[ -f ${md5_EzOpWrt_uefi} ] && md5 ${md5_EzOpWrt_uefi} > EzOpWrt_dev-efi.md5 &&echo "ip=$ip" >> EzOpWrt_dev-efi.md5
 OTA_URL="https://$github/$auth/releases/download"
 
 [ -f "${md5_EzOpWrt_uefi}" ] && {
 file_size=`du -m  ${md5_EzOpWrt_uefi} | cut -f1`
-SHA256=`sha256sum ${md5_EzOpWrt_uefi} | awk '{print $1}'`
+md5=`md5 ${md5_EzOpWrt_uefi} | awk '{print $1}'`
     printf '{
     "%s": [
     {
@@ -591,7 +592,7 @@ SHA256=`sha256sum ${md5_EzOpWrt_uefi} | awk '{print $1}'`
         "name": "%s",
         "size": "%s",
         "date": "%s",
-        "sha256": "%s",
+        "md5": "%s",
         "ip": "%s",
         "url": "%s/%s/%s"
     }
@@ -602,7 +603,7 @@ SHA256=`sha256sum ${md5_EzOpWrt_uefi} | awk '{print $1}'`
     "${md5_EzOpWrt_uefi}" \
     "${file_size}" \
     "${EZDATE}" \
-    "${SHA256}" \
+    "${md5}" \
     "${ip}" \
     "${OTA_URL}" "${EZVER}" "${md5_EzOpWrt_uefi}" > ezota.json
 }
